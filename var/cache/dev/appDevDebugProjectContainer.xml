@@ -171,6 +171,7 @@
     <parameter key="twig.exception_listener.controller">twig.controller.exception:showAction</parameter>
     <parameter key="twig.form.resources" type="collection">
       <parameter>form_div_layout.html.twig</parameter>
+      <parameter>bootstrap_3_horizontal_layout.html.twig</parameter>
     </parameter>
     <parameter key="monolog.use_microseconds">true</parameter>
     <parameter key="monolog.swift_mailer.handlers" type="collection"/>
@@ -519,7 +520,7 @@
                 <tag name="cache.pool" clearer="cache.default_clearer"/>
                 <argument>hcDBElgVQn</argument>
                 <argument>0</argument>
-                <argument>EBum7Q-Vtx8oNOVJEBgdKx</argument>
+                <argument>pUeLi36L8jVe1oYk3TdY46</argument>
                 <argument>/home/julien/data/hackathon-2-Quizz/var/cache/dev/pools</argument>
                 <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
                 <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
@@ -702,7 +703,7 @@
       <tag name="cache.pool" clearer="cache.default_clearer"/>
       <argument>PrsPvxw2qW</argument>
       <argument>0</argument>
-      <argument>EBum7Q-Vtx8oNOVJEBgdKx</argument>
+      <argument>pUeLi36L8jVe1oYk3TdY46</argument>
       <argument>/home/julien/data/hackathon-2-Quizz/var/cache/dev/pools</argument>
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
@@ -712,7 +713,7 @@
       <tag name="cache.pool" clearer="cache.default_clearer"/>
       <argument>xm9PxQUP0S</argument>
       <argument>0</argument>
-      <argument>EBum7Q-Vtx8oNOVJEBgdKx</argument>
+      <argument>pUeLi36L8jVe1oYk3TdY46</argument>
       <argument>/home/julien/data/hackathon-2-Quizz/var/cache/dev/pools</argument>
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
@@ -1753,7 +1754,7 @@
         </argument>
         <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
-            <argument>590228ee6d09c3.92409836</argument>
+            <argument>5902380342c6a9.35175664</argument>
           </service>
         </argument>
       </argument>
@@ -2082,7 +2083,7 @@
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
             <argument type="service" id="security.token_storage"/>
-            <argument>590228ee6d09c3.92409836</argument>
+            <argument>5902380342c6a9.35175664</argument>
             <argument type="service" id="monolog.logger.security" on-invalid="null"/>
             <argument type="service" id="security.authentication.manager"/>
           </service>
@@ -2200,10 +2201,11 @@
       <argument type="collection">
         <argument key="debug">true</argument>
         <argument key="strict_variables">true</argument>
-        <argument key="exception_controller">twig.controller.exception:showAction</argument>
         <argument key="form_themes" type="collection">
           <argument>form_div_layout.html.twig</argument>
+          <argument>bootstrap_3_horizontal_layout.html.twig</argument>
         </argument>
+        <argument key="exception_controller">twig.controller.exception:showAction</argument>
         <argument key="autoescape">name</argument>
         <argument key="cache">/home/julien/data/hackathon-2-Quizz/var/cache/dev/twig</argument>
         <argument key="charset">UTF-8</argument>
@@ -2453,6 +2455,7 @@
         <service class="Symfony\Bridge\Twig\Form\TwigRendererEngine" public="false">
           <argument type="collection">
             <argument>form_div_layout.html.twig</argument>
+            <argument>bootstrap_3_horizontal_layout.html.twig</argument>
           </argument>
           <argument type="service" id="twig"/>
         </service>
