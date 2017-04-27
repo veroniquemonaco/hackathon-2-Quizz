@@ -1,4 +1,13 @@
 /*base.html.twig*/
+.container-fluid {
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    border: none;
+    border-radius: 0;
+}
 
 body {
     font-family: Montserat;
