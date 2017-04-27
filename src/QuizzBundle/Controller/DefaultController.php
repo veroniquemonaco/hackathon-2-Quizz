@@ -63,4 +63,12 @@ class DefaultController extends Controller
     {
         return $this->render('QuizzBundle:Site:result.html.twig');
     }
+
+    /**
+     * @Route("/player/", name="player")
+     */
+    public function playerAction()
+    {
+        return $this->render('QuizzBundle:Site:player.html.twig');
+    }
 }
