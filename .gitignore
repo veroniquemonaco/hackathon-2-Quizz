@@ -1,10 +1,12 @@
 /app/config/parameters.yml
+<<<<<<< HEAD
 /var/*
 /var/cache/*
 /var/logs/*
 /var/sessions/*
 
 /vendor
+
 .idea
 
 
