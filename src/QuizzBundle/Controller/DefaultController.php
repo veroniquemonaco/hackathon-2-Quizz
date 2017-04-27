@@ -89,4 +89,12 @@ class DefaultController extends Controller
         $param = ['score'=>$score, 'user'=>$user];
         return $this->render('QuizzBundle:Site:result.html.twig',$param);
     }
+
+    /**
+     * @Route("/player/", name="player")
+     */
+    public function playerAction()
+    {
+        return $this->render('QuizzBundle:Site:player.html.twig');
+    }
 }
