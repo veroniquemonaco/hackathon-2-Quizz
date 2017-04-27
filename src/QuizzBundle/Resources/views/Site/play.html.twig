@@ -1,0 +1,141 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    {{ dump() }}
+    <div class="container-fluid">
+        <div class="row">
+
+            <!-- bloc HighScore -->
+            <div class="highScore">
+                <div class="col-lg-2 col-lg-offset-1">
+                    <h3>HIGHSCORE</h3>
+                    <table>
+                        <div class="row">
+                            <tr class="highScoreTR">
+                                <td class="tdRank col-lg-2">Rank</td>
+                                <td class="tdNom col-lg-2">Nom</td>
+                                <td class="tdScore col-lg-2">Score</td>
+                            </tr>
+
+                        </div>
+
+                        <tr>
+                            <td class="tdRank">1</td>
+                            <td class="tdNom">zrgzrg</td>
+                            <td class="tdScore">9001</td>
+                        </tr>
+                        <tr>
+                            <td class="tdRank">2</td>
+                            <td class="tdNom">dghthdht</td>
+                            <td class="tdScore">5</td>
+                        </tr>
+                        <tr>
+                            <td class="tdRank">3</td>
+                            <td class="tdNom">zzrgzrhg</td>
+                            <td class="tdScore">4</td>
+                        </tr>
+
+                    </table>
+                </div>
+            </div>
+            <!-- Fin bloc HighScore -->
+
+            <!-- bloc carousel question -->
+            <div class="col-lg-6">
+                <div id="carousel" class="carousel slide fade in" data-ride="carousel" data-interval="false">
+
+                    <div class="carousel-inner" role="listbox">
+                        {% for question in questions %}
+                            <div class="item {% if loop.index == 1 %}active{% endif %}">
+                                <div class="caption text-center">
+                                    <h3>{{ question.title }}</h3>
+                                    <input type="radio" name="Question{{ loop.index }}" value="1">{{ question.answer1 }}<br>
+                                    <input type="radio" name="Question{{ loop.index }}" value="2">{{ question.answer2 }}<br>
+                                    <input type="radio" name="Question{{ loop.index }}" value="3">{{ question.answer3 }}<br>
+                                    <input type="radio" name="Question{{ loop.index }}" value="4">{{ question.answer4 }}
+                                    <input type="hidden" name="csrf" value="{{ question.goodanswer }}">
+                                </div>
+                            </div>
+                            {% if loop.index > 1 %}
+                                <a class="left carousel-control" role="button" data-toggle="modal" data-target="#myModal">
+                                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                </a>
+                            {% else %}
+                                <a class="left carousel-control" role="button" data-toggle="modal" data-target="#myModal" hidden>
+                                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                </a>
+                            {% endif %}
+
+                            <a class="right carousel-control" href="#carousel" role="button" data-slide="next" {% if loop.index > 9 %}hidden{% endif %}>
+                                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                            </a>
+                            {% if loop.index > 9 %}
+                                <form action="{{ path('result') }}" method="post">
+                                    <input class="btn btn-success" name="valider" value="Terminer le Quizz" type="submit">
+                                </form>
+                            {% else %}
+                                <form action="{{ path('result') }}" method="post" hidden>
+                                    <input class="btn btn-success" name="valider" value="Terminer le Quizz" type="submit">
+                                </form>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+
+                </div>
+            </div>
+
+
+
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <p>Je crois pas!</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fin bloc carousel question -->
+
+            <!-- bloc PersonnalScore -->
+            <div class="personnalScore">
+                <div class="col-lg-2">
+                    <h3>PERSONAL BEST</h3>
+                    <table>
+                        <div class="row">
+                            <tr class="personnalScoreTR">
+                                <td class="tdRank col-lg-2">Rank</td>
+                                <td class="tdNom col-lg-2">Nom</td>
+                                <td class="tdScore col-lg-2">Score</td>
+                            </tr>
+
+                        </div>
+
+                        <tr>
+                            <td class="tdRank">1</td>
+                            <td class="tdNom">zrgzrg</td>
+                            <td class="tdScore">9001</td>
+                        </tr>
+                        <tr>
+                            <td class="tdRank">2</td>
+                            <td class="tdNom">dghthdht</td>
+                            <td class="tdScore">5</td>
+                        </tr>
+                        <tr>
+                            <td class="tdRank">3</td>
+                            <td class="tdNom">zzrgzrhg</td>
+                            <td class="tdScore">4</td>
+                        </tr>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- Fin bloc PersonnalScore -->
+    </div>
+{% endblock %}
