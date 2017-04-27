@@ -1,9 +1,14 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Questioneasies list</h1>
+    <h1 class="text-center">Liste des question faciles</h1>
 
-    <table>
+    <div class="col-md-4 col-md-offset-5">
+        <a href="{{ path('questioneasy_new') }}">Creer une nouvelle question</a>
+    </div>
+
+    <div class="row">
+    <table class="col-md-10 col-md-offset-1">
         <thead>
             <tr>
                 <th>Id</th>
@@ -43,9 +48,5 @@
         </tbody>
     </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('questioneasy_new') }}">Create a new questionEasy</a>
-        </li>
-    </ul>
+
 {% endblock %}

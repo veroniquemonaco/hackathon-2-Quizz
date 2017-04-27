@@ -1,13 +1,23 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-    <h1>Categories list</h1>
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+{% endblock %}
 
-    <table>
+{% block body %}
+    <h1 class="text-center">Liste des categories</h1>
+
+<div class="col-md-4 col-md-offset-5">
+     <a href="{{ path('category_new') }}">Creer une nouvelle categorie</a>
+</div>
+
+    <div class="row">
+    <table class="col-md-5 col-md-offset-4">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Name</th>
+                <th>Nom</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -30,10 +40,7 @@
         {% endfor %}
         </tbody>
     </table>
+    </div>
 
-    <ul>
-        <li>
-            <a href="{{ path('category_new') }}">Create a new category</a>
-        </li>
-    </ul>
+
 {% endblock %}
