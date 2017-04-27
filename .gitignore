@@ -1,0 +1,10 @@
+/app/config/parameters.yml
+/var/*
+/var/cache/*
+/var/logs/*
+/var/sessions/*
+
+/vendor/
+.idea
+
+
