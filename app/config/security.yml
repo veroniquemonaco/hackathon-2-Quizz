@@ -34,6 +34,7 @@ security:
         - { path: ^/select, role: ROLE_USER }
         - { path: ^/play$, role: ROLE_USER }
         - { path: ^/result, role: ROLE_USER }
+        - { path: ^/player, role: ROLE_USER }
         - { path: ^/admin/, role: ROLE_ADMIN }
         - { path: ^/, role: IS_AUTHENTICATED_ANONYMOUSLY }
 
