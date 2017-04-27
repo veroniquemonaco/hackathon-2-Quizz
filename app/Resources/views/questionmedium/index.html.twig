@@ -1,5 +1,10 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+{% endblock %}
+
 {% block body %}
     <h1 class="text-center">Liste des questions Medium</h1>
 
@@ -11,13 +16,12 @@
     <table class="col-md-10 col-md-offset-1">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Title</th>
                 <th>Answer1</th>
                 <th>Answer2</th>
                 <th>Answer3</th>
                 <th>Answer4</th>
-                <th>Goodanswer</th>
+                <th>Good</th>
                 <th>Category</th>
                 <th>Actions</th>
             </tr>
@@ -25,7 +29,6 @@
         <tbody>
         {% for questionMedium in questionMedia %}
             <tr>
-                <td><a href="{{ path('questionmedium_show', { 'id': questionMedium.id }) }}">{{ questionMedium.id }}</a></td>
                 <td>{{ questionMedium.title }}</td>
                 <td>{{ questionMedium.answer1 }}</td>
                 <td>{{ questionMedium.answer2 }}</td>

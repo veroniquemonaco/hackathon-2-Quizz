@@ -10,4 +10,12 @@ namespace QuizzBundle\Repository;
  */
 class QuestionHardRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findByCategory($category) {
+        $rawSql = "SELECT * FROM question_hard JOIN category ON question_hard.category_id=category.id WHERE category.id=$category";
+
+        $stmt = $this->getEntityManager()->getConnection()->prepare($rawSql);
+        $stmt->execute([]);
+
+        return $stmt->fetchAll();
+    }
 }

@@ -1,4 +1,23 @@
 /*base.html.twig*/
+.container-fluid {
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    border: none;
+    border-radius: 0;
+}
+
+body {
+    font-family: Montserat;
+}
+
+h1 {
+    color: #745698;
+    font-weight: bold;
+    text-transform: uppercase;
+}
 
 body{
     background-image: url("../images/backgroundslide.jpeg");
@@ -13,6 +32,11 @@ body{
 .formbanniere{
     padding-top:15px;
     padding-bottom:15px;
+}
+
+.tailleBouton {
+    padding: 15px;
+    height: 65px;
 }
 
 .navbar{
@@ -43,6 +67,7 @@ body{
     font-size: 70px;
     margin-bottom: 150px;
 }
+
 
 .carousel-inner{
     background-color: rgba(0,0,0,0);
@@ -75,5 +100,24 @@ body{
 .btn-lg, .btn-group-lg > .btn{
     color:white;
     background-color: #745698;
+}
+
+
+/*formulaire login */
+
+.formLogin {
+    margin-top: 50px;
+}
+
+.bouton {
+
+}
+
+.marginNom {
+    margin-top: 0px;
+}
+
+.marginFormLogin {
+    margin: 30px auto;
 }
 

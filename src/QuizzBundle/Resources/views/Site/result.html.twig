@@ -1,6 +1,7 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
+    {#{{ dump() }}#}
     <div class="container-fluid">
         <div class="row">
 
@@ -41,7 +42,7 @@
 
             <!-- bloc Results -->
             <div class="col-lg-6">
-                <h2><b>TU A FAIT 957.784 POINTS!!! EN 2.395 SECONDES!</b></h2>
+                <h2><b>TU A FAIT {{ score }} POINTS!!! EN 2.395 SECONDES!</b></h2>
                 <h2><b>Tu a fait le 23e meilleur score de tous les temps de l'univers entier</b></h2>
                 <h2><b>Tu a fait ton 4e meilleur score</b></h2>
                 <form action="{{ path('select') }}" method="post">
