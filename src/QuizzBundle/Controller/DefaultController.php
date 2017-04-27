@@ -95,6 +95,7 @@ class DefaultController extends Controller
      */
     public function playerAction()
     {
-        return $this->render('QuizzBundle:Site:player.html.twig');
+        $user = $this->getUser();
+        return $this->render('QuizzBundle:Site:player.html.twig', ['user'=>$user]);
     }
 }
