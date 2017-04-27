@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1 class="text-center">Questions</h1>
+
+    <div class="col-md-4 col-md-offset-5">
+
+        <a href="{{ path('questioneasy_index') }}">Retour à la liste</a>
+
+        <a href="{{ path('questioneasy_edit', { 'id': questionEasy.id }) }}">Editer</a>
+    </div>
+
+    <div class="row">
+    <table class="col-md-4 col-md-offset-4">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ questionEasy.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ questionEasy.title }}</td>
+            </tr>
+            <tr>
+                <th>Answer1</th>
+                <td>{{ questionEasy.answer1 }}</td>
+            </tr>
+            <tr>
+                <th>Answer2</th>
+                <td>{{ questionEasy.answer2 }}</td>
+            </tr>
+            <tr>
+                <th>Answer3</th>
+                <td>{{ questionEasy.answer3 }}</td>
+            </tr>
+            <tr>
+                <th>Answer4</th>
+                <td>{{ questionEasy.answer4 }}</td>
+            </tr>
+            <tr>
+                <th>Goodanswer</th>
+                <td>{{ questionEasy.goodanswer }}</td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+
+    <div class="col-md-2 col-md-offset-5">
+        {{ form_start(delete_form) }}
+        <input type="submit" value="Delete">
+        {{ form_end(delete_form) }}
+    </div>
+
+{% endblock %}
