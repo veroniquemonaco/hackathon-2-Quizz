@@ -125,4 +125,3 @@ class Game
         return $this->finalscore;
     }
 }
-

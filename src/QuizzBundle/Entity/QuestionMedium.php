@@ -65,6 +65,14 @@ class QuestionMedium
 
 
     /**
+     * @var string
+     *
+     * @ORM\ManyToOne(targetEntity="Category",inversedBy="questionsmedium")
+     */
+    private $category;
+
+
+    /**
      * Get id
      *
      * @return int
@@ -217,5 +225,28 @@ class QuestionMedium
     {
         return $this->goodanswer;
     }
-}
 
+    /**
+     * Set category
+     *
+     * @param \QuizzBundle\Entity\Category $category
+     *
+     * @return QuestionMedium
+     */
+    public function setCategory(\QuizzBundle\Entity\Category $category = null)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get category
+     *
+     * @return \QuizzBundle\Entity\Category
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+}

@@ -63,6 +63,13 @@ class QuestionEasy
      */
     private $goodanswer;
 
+    /**
+     * @var string
+     *
+     * @ORM\ManyToOne(targetEntity="Category",inversedBy="questionseasy")
+     */
+    private $category;
+
 
     /**
      * Get id
@@ -217,5 +224,28 @@ class QuestionEasy
     {
         return $this->goodanswer;
     }
-}
 
+    /**
+     * Set category
+     *
+     * @param \QuizzBundle\Entity\Category $category
+     *
+     * @return QuestionEasy
+     */
+    public function setCategory(\QuizzBundle\Entity\Category $category = null)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get category
+     *
+     * @return \QuizzBundle\Entity\Category
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+}
