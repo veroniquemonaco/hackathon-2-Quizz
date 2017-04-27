@@ -5,12 +5,12 @@ namespace QuizzBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * QuestionMedium
+ * QuestionHard
  *
- * @ORM\Table(name="question_medium")
- * @ORM\Entity(repositoryClass="QuizzBundle\Repository\QuestionMediumRepository")
+ * @ORM\Table(name="question_hard")
+ * @ORM\Entity(repositoryClass="QuizzBundle\Repository\QuestionHardRepository")
  */
-class QuestionMedium
+class QuestionHard
 {
     /**
      * @var int
@@ -63,11 +63,10 @@ class QuestionMedium
      */
     private $goodanswer;
 
-
     /**
      * @var string
      *
-     * @ORM\ManyToOne(targetEntity="Category",inversedBy="questionsmedium")
+     * @ORM\ManyToOne(targetEntity="Category",inversedBy="questionshard")
      */
     private $category;
 
@@ -87,7 +86,7 @@ class QuestionMedium
      *
      * @param string $title
      *
-     * @return QuestionMedium
+     * @return QuestionHard
      */
     public function setTitle($title)
     {
@@ -111,7 +110,7 @@ class QuestionMedium
      *
      * @param string $answer1
      *
-     * @return QuestionMedium
+     * @return QuestionHard
      */
     public function setAnswer1($answer1)
     {
@@ -135,7 +134,7 @@ class QuestionMedium
      *
      * @param string $answer2
      *
-     * @return QuestionMedium
+     * @return QuestionHard
      */
     public function setAnswer2($answer2)
     {
@@ -159,7 +158,7 @@ class QuestionMedium
      *
      * @param string $answer3
      *
-     * @return QuestionMedium
+     * @return QuestionHard
      */
     public function setAnswer3($answer3)
     {
@@ -183,7 +182,7 @@ class QuestionMedium
      *
      * @param string $answer4
      *
-     * @return QuestionMedium
+     * @return QuestionHard
      */
     public function setAnswer4($answer4)
     {
@@ -207,7 +206,7 @@ class QuestionMedium
      *
      * @param string $goodanswer
      *
-     * @return QuestionMedium
+     * @return QuestionHard
      */
     public function setGoodanswer($goodanswer)
     {
@@ -225,28 +224,5 @@ class QuestionMedium
     {
         return $this->goodanswer;
     }
-
-    /**
-     * Set category
-     *
-     * @param \QuizzBundle\Entity\Category $category
-     *
-     * @return QuestionMedium
-     */
-    public function setCategory(\QuizzBundle\Entity\Category $category = null)
-    {
-        $this->category = $category;
-
-        return $this;
-    }
-
-    /**
-     * Get category
-     *
-     * @return \QuizzBundle\Entity\Category
-     */
-    public function getCategory()
-    {
-        return $this->category;
-    }
 }
+
