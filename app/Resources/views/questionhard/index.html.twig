@@ -1,9 +1,14 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Questionhards list</h1>
+    <h1 class="text-center">Liste des questions Hard</h1>
 
-    <table>
+    <div class="col-md-4 col-md-offset-5">
+        <a href="{{ path('questionhard_new') }}">Creer une nouvelle question</a>
+    </div>
+
+    <div class="row">
+    <table class="col-md-10 col-md-offset-1">
         <thead>
             <tr>
                 <th>Id</th>
@@ -27,7 +32,7 @@
                 <td>{{ questionHard.answer3 }}</td>
                 <td>{{ questionHard.answer4 }}</td>
                 <td>{{ questionHard.goodanswer }}</td>
-                <td>{{ questionEasy.category.name }}</td>
+                <td>{{ questionHard.category.name }}</td>
                 <td>
                     <ul>
                         <li>
@@ -42,10 +47,6 @@
         {% endfor %}
         </tbody>
     </table>
+    </div>
 
-    <ul>
-        <li>
-            <a href="{{ path('questionhard_new') }}">Create a new questionHard</a>
-        </li>
-    </ul>
 {% endblock %}

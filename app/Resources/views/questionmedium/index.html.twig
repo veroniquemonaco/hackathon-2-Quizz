@@ -1,9 +1,14 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Questionmedia list</h1>
+    <h1 class="text-center">Liste des questions Medium</h1>
 
-    <table>
+    <div class="col-md-4 col-md-offset-5">
+        <a href="{{ path('questionmedium_new') }}">Creer une nouvelle question</a>
+    </div>
+
+    <div class="row">
+    <table class="col-md-10 col-md-offset-1">
         <thead>
             <tr>
                 <th>Id</th>
@@ -27,7 +32,7 @@
                 <td>{{ questionMedium.answer3 }}</td>
                 <td>{{ questionMedium.answer4 }}</td>
                 <td>{{ questionMedium.goodanswer }}</td>
-                <td>{{ questionEasy.category.name }}</td>
+                <td>{{ questionMedium.category.name }}</td>
                 <td>
                     <ul>
                         <li>
@@ -42,10 +47,6 @@
         {% endfor %}
         </tbody>
     </table>
+    </div>
 
-    <ul>
-        <li>
-            <a href="{{ path('questionmedium_new') }}">Create a new questionMedium</a>
-        </li>
-    </ul>
 {% endblock %}
