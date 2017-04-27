@@ -1,0 +1,90 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="row">
+
+            <!-- bloc HighScore -->
+            <div class="highScore">
+                <div class="col-lg-2 col-lg-offset-1">
+                    <h3>HIGHSCORE</h3>
+                    <table>
+                        <div class="row">
+                            <tr class="highScoreTR">
+                                <td class="tdRank col-lg-2">Rank</td>
+                                <td class="tdNom col-lg-2">Nom</td>
+                                <td class="tdScore col-lg-2">Score</td>
+                            </tr>
+
+                        </div>
+
+                        <tr>
+                            <td class="tdRank">1</td>
+                            <td class="tdNom">zrgzrg</td>
+                            <td class="tdScore">9001</td>
+                        </tr>
+                        <tr>
+                            <td class="tdRank">2</td>
+                            <td class="tdNom">dghthdht</td>
+                            <td class="tdScore">5</td>
+                        </tr>
+                        <tr>
+                            <td class="tdRank">3</td>
+                            <td class="tdNom">zzrgzrhg</td>
+                            <td class="tdScore">4</td>
+                        </tr>
+
+                    </table>
+                </div>
+            </div>
+            <!-- Fin bloc HighScore -->
+
+            <!-- bloc Results -->
+            <div class="col-lg-6">
+                <h2><b>TU A FAIT 957.784 POINTS!!! EN 2.395 SECONDES!</b></h2>
+                <h2><b>Tu a fait le 23e meilleur score de tous les temps de l'univers entier</b></h2>
+                <h2><b>Tu a fait ton 4e meilleur score</b></h2>
+                <form action="{{ path('select') }}" method="post">
+                    <input class="btn btn-success" name="valider" value="Rejouer" type="submit">
+                </form>
+            </div>
+
+            <!-- Fin bloc Results -->
+
+            <!-- bloc PersonnalScore -->
+            <div class="personnalScore">
+                <div class="col-lg-2">
+                    <h3>PERSONAL BEST</h3>
+                    <table>
+                        <div class="row">
+                            <tr class="personnalScoreTR">
+                                <td class="tdRank col-lg-2">Rank</td>
+                                <td class="tdNom col-lg-2">Nom</td>
+                                <td class="tdScore col-lg-2">Score</td>
+                            </tr>
+
+                        </div>
+
+                        <tr>
+                            <td class="tdRank">1</td>
+                            <td class="tdNom">zrgzrg</td>
+                            <td class="tdScore">9001</td>
+                        </tr>
+                        <tr>
+                            <td class="tdRank">2</td>
+                            <td class="tdNom">dghthdht</td>
+                            <td class="tdScore">5</td>
+                        </tr>
+                        <tr>
+                            <td class="tdRank">3</td>
+                            <td class="tdNom">zzrgzrhg</td>
+                            <td class="tdScore">4</td>
+                        </tr>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- Fin bloc PersonnalScore -->
+    </div>
+{% endblock %}
