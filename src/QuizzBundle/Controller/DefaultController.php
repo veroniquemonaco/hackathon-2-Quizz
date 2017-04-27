@@ -13,7 +13,8 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('QuizzBundle:Site:index.html.twig');
+        $user = $this->getUser();
+        return $this->render('QuizzBundle:Site:index.html.twig', ['user'=>$user]);
     }
 
     /**
@@ -21,11 +22,12 @@ class DefaultController extends Controller
      */
     public function selectAction()
     {
+        $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
         $category = $em->getRepository('QuizzBundle:Category')
             ->findAll();
 
-        $param = ['categories'=>$category];
+        $param = ['categories'=>$category, 'user'=>$user];
         return $this->render('QuizzBundle:Site:select.html.twig',$param);
     }
 
@@ -34,6 +36,7 @@ class DefaultController extends Controller
      */
     public function playAction()
     {
+        $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
         if ( "random" == $_POST['Cate'] )
         {
@@ -52,7 +55,7 @@ class DefaultController extends Controller
         }
         shuffle($question);
         $questions = array_slice($question, 0, 10);
-        $param = ['questions'=>$questions];
+        $param = ['questions'=>$questions, 'user'=>$user];
         return $this->render('QuizzBundle:Site:play.html.twig',$param);
     }
 
