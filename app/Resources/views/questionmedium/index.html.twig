@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Questionmedia list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Answer1</th>
+                <th>Answer2</th>
+                <th>Answer3</th>
+                <th>Answer4</th>
+                <th>Goodanswer</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for questionMedium in questionMedia %}
+            <tr>
+                <td><a href="{{ path('questionmedium_show', { 'id': questionMedium.id }) }}">{{ questionMedium.id }}</a></td>
+                <td>{{ questionMedium.title }}</td>
+                <td>{{ questionMedium.answer1 }}</td>
+                <td>{{ questionMedium.answer2 }}</td>
+                <td>{{ questionMedium.answer3 }}</td>
+                <td>{{ questionMedium.answer4 }}</td>
+                <td>{{ questionMedium.goodanswer }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('questionmedium_show', { 'id': questionMedium.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('questionmedium_edit', { 'id': questionMedium.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('questionmedium_new') }}">Create a new questionMedium</a>
+        </li>
+    </ul>
+{% endblock %}

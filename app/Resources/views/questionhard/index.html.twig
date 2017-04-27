@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Questionhards list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Answer1</th>
+                <th>Answer2</th>
+                <th>Answer3</th>
+                <th>Answer4</th>
+                <th>Goodanswer</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for questionHard in questionHards %}
+            <tr>
+                <td><a href="{{ path('questionhard_show', { 'id': questionHard.id }) }}">{{ questionHard.id }}</a></td>
+                <td>{{ questionHard.title }}</td>
+                <td>{{ questionHard.answer1 }}</td>
+                <td>{{ questionHard.answer2 }}</td>
+                <td>{{ questionHard.answer3 }}</td>
+                <td>{{ questionHard.answer4 }}</td>
+                <td>{{ questionHard.goodanswer }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('questionhard_show', { 'id': questionHard.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('questionhard_edit', { 'id': questionHard.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('questionhard_new') }}">Create a new questionHard</a>
+        </li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Questioneasies list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Answer1</th>
+                <th>Answer2</th>
+                <th>Answer3</th>
+                <th>Answer4</th>
+                <th>Goodanswer</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for questionEasy in questionEasies %}
+            <tr>
+                <td><a href="{{ path('questioneasy_show', { 'id': questionEasy.id }) }}">{{ questionEasy.id }}</a></td>
+                <td>{{ questionEasy.title }}</td>
+                <td>{{ questionEasy.answer1 }}</td>
+                <td>{{ questionEasy.answer2 }}</td>
+                <td>{{ questionEasy.answer3 }}</td>
+                <td>{{ questionEasy.answer4 }}</td>
+                <td>{{ questionEasy.goodanswer }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('questioneasy_show', { 'id': questionEasy.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('questioneasy_edit', { 'id': questionEasy.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('questioneasy_new') }}">Create a new questionEasy</a>
+        </li>
+    </ul>
+{% endblock %}
