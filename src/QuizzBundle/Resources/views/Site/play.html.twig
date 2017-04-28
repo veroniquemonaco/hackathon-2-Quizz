@@ -61,10 +61,10 @@
                                         <input type="hidden" name="answer{{ loop.index }}"
                                                value="{{ question.goodanswer }}"><br/>
                                         {% if loop.last %}
-                                            <input class="btn btn-success" name="valider" value="Terminer le Quizz"
+                                            <input class="btn btn-default bouton" name="valider" value="Terminer le Quizz"
                                                    type="submit">
                                         {% else %}
-                                            <a href="#carousel" class="btn btn-default" role="button" data-slide="next">Question
+                                            <a href="#carousel" class="btn btn-default bouton" role="button" data-slide="next">Question
                                                 suivante</a>
                                         {% endif %}
                                     </div>
