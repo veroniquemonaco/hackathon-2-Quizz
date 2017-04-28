@@ -1,0 +1,61 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    {#{{ dump() }}#}
+<div class="container-fluid">
+    <div class="row">
+
+        <!-- bloc carousel question -->
+        <div class="col-lg-offset-1 col-lg-4 play">
+            <div id="carousel" class="carousel slide fade in" data-ride="carousel" data-interval="false">
+                <form action="{{ path('result') }}" method="post">
+                    <div class="carousel-inner" role="listbox">
+                        {% for question in questions %}
+                            <div class="item {% if loop.index == 1 %}active{% endif %}">
+                                <div class="caption text-center">
+                                    <h3>{{ question.title }}</h3>
+                                    <input type="radio" name="Question{{ loop.index }}" id="{{ question.answer1 }}"
+                                           value="1"><label for="{{ question.answer1 }}">{{ question.answer1 }}</label><br>
+                                    <input type="radio" name="Question{{ loop.index }}" id="{{ question.answer2 }}"
+                                           value="2"><label for="{{ question.answer2 }}">{{ question.answer2 }}</label><br>
+                                    <input type="radio" name="Question{{ loop.index }}" id="{{ question.answer3 }}"
+                                           value="3"><label for="{{ question.answer3 }}">{{ question.answer3 }}</label><br>
+                                    <input type="radio" name="Question{{ loop.index }}" id="{{ question.answer4 }}"
+                                           value="4"><label for="{{ question.answer4 }}">{{ question.answer4 }}</label><br>
+                                    <input type="hidden" name="answer{{ loop.index }}"
+                                           value="{{ question.goodanswer }}"><br/>
+                                    {% if loop.last %}
+                                        <input class="btn btn-default bouton" name="valider" value="Terminer le Quizz"
+                                               type="submit">
+                                    {% else %}
+                                        <a href="#carousel" class="btn btn-default bouton" role="button" data-slide="next">Question
+                                            suivante</a>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+
+
+
+                    <input type="hidden" name="diff" value="{{ diff }}">
+                    <input type="hidden" name="starttime" value="{{ starttime }}">
+                    <input type="hidden" name="game" value="{{ game }}">
+
+                </form>
+            </div>
+
+            <div class="personnageplay">
+                <img src="{{ asset('images/personnage.png') }}" alt="personne"/>
+            </div>
+
+        </div>
+
+        <!-- Fin bloc carousel question -->
+
+
+    </div>
+</div>
+{% endblock %}

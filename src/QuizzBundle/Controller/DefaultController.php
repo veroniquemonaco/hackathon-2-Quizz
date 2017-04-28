@@ -224,5 +224,29 @@ class DefaultController extends Controller
 
     }
 
+    /**
+     * @Route("/defis/", name="defis")
+     */
+    public function defisAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $games = $em->getRepository('QuizzBundle:Game')
+            ->findBy([], ['finalscore' => 'DESC'], 20, 0);
+
+        $user = $this->getUser();
+        return $this->render('QuizzBundle:Site:defis.html.twig', ['user' => $user, 'games' => $games]);
+    }
+
+    /**
+     * @Route("/duel/", name="duel")
+     */
+    public function duelAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $user = $this->getUser();
+        return $this->render('QuizzBundle:Site:defis.html.twig', ['user' => $user]);
+    }
+
 
 }
