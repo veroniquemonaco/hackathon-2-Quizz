@@ -54,14 +54,14 @@
                                 <div class="item {% if loop.index == 1 %}active{% endif %}">
                                     <div class="caption text-center">
                                         <h3>{{ question.title }}</h3>
-                                        <input type="radio" name="Question{{ loop.index }}"
-                                               value="1">{{ question.answer1 }}<br>
-                                        <input type="radio" name="Question{{ loop.index }}"
-                                               value="2">{{ question.answer2 }}<br>
-                                        <input type="radio" name="Question{{ loop.index }}"
-                                               value="3">{{ question.answer3 }}<br>
-                                        <input type="radio" name="Question{{ loop.index }}"
-                                               value="4">{{ question.answer4 }}
+                                        <input type="radio" name="Question{{ loop.index }}" id="{{ question.answer1 }}"
+                                               value="1"><label for="{{ question.answer1 }}">{{ question.answer1 }}</label><br>
+                                        <input type="radio" name="Question{{ loop.index }}" id="{{ question.answer2 }}"
+                                               value="2"><label for="{{ question.answer2 }}">{{ question.answer2 }}</label><br>
+                                        <input type="radio" name="Question{{ loop.index }}" id="{{ question.answer3 }}"
+                                               value="3"><label for="{{ question.answer3 }}">{{ question.answer3 }}</label><br>
+                                        <input type="radio" name="Question{{ loop.index }}" id="{{ question.answer4 }}"
+                                               value="4"><label for="{{ question.answer4 }}">{{ question.answer4 }}</label><br>
                                         <input type="hidden" name="answer{{ loop.index }}"
                                                value="{{ question.goodanswer }}"><br/>
                                         {% if loop.last %}
