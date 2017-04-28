@@ -14,7 +14,7 @@
 <div class="container-fluid banniere text-center">
     <div class="row tailleBouton">
         {% if is_granted("IS_AUTHENTICATED_FULLY") %}
-            <h3 class="marginNom">  Bienvenue à toi padawan <b>{{ user.username|capitalize }} </b><a href="/app_dev.php/logout" class="btn btn-default"> Déconnection</a></h3>
+            <h3 class="marginNom">  Bienvenue à toi {% if is_granted('ROLE_ADMIN') %}maître {% else %}padawan {% endif %}<b>{{ user.username|capitalize }} </b><a href="/app_dev.php/logout" class="btn btn-default"> Déconnection</a></h3>
         {% else %}
             <a href="/app_dev.php/login" class="btn btn-default">Connecte toi et deviens le maître !</a>
             <a href="/app_dev.php/register" class="btn btn-default">Envie de nous rejoindre ? Clique ici !</a>
