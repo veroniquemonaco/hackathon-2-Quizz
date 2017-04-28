@@ -5,6 +5,7 @@ namespace QuizzBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use QuizzBundle\Entity\Category;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 class DefaultController extends Controller
 {
@@ -55,7 +56,9 @@ class DefaultController extends Controller
         }
         shuffle($question);
         $questions = array_slice($question, 0, 10);
-        $param = ['questions'=>$questions, 'diff'=>$_POST['difficultee'], 'user'=>$user];
+        $starttime = microtime(true);
+
+        $param = ['questions'=>$questions, 'diff'=>$_POST['difficultee'], 'user'=>$user, 'starttime'=>$starttime];
         return $this->render('QuizzBundle:Site:play.html.twig',$param);
     }
 
@@ -64,6 +67,11 @@ class DefaultController extends Controller
      */
     public function resultAction()
     {
+        $endtime = microtime(true);
+        $starttime = $_POST['starttime'];
+        $timer = $endtime - $starttime;
+        $timer = round($timer);
+
         $user = $this->getUser();
 
         $score = 0;
@@ -86,9 +94,12 @@ class DefaultController extends Controller
             $score = $score*(333+(1/(mt_rand(1,99999999))));
         }
 
-        $param = ['score'=>$score, 'user'=>$user];
+        $score = $score/$timer;
+
+        $param = ['score'=>$score, 'user'=>$user, 'temps'=>$timer];
         return $this->render('QuizzBundle:Site:result.html.twig',$param);
     }
+
 
     /**
      * @Route("/player/", name="player")
@@ -98,4 +109,5 @@ class DefaultController extends Controller
         $user = $this->getUser();
         return $this->render('QuizzBundle:Site:player.html.twig', ['user'=>$user]);
     }
+
 }

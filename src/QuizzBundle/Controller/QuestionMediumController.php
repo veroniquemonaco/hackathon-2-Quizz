@@ -22,12 +22,15 @@ class QuestionMediumController extends Controller
      */
     public function indexAction()
     {
+        $user = $this->getUser();
+
         $em = $this->getDoctrine()->getManager();
 
         $questionMedia = $em->getRepository('QuizzBundle:QuestionMedium')->findAll();
 
         return $this->render('questionmedium/index.html.twig', array(
             'questionMedia' => $questionMedia,
+            'user'=>$user
         ));
     }
 
@@ -39,6 +42,8 @@ class QuestionMediumController extends Controller
      */
     public function newAction(Request $request)
     {
+        $user = $this->getUser();
+
         $questionMedium = new Questionmedium();
         $form = $this->createForm('QuizzBundle\Form\QuestionMediumType', $questionMedium);
         $form->handleRequest($request);
@@ -48,12 +53,13 @@ class QuestionMediumController extends Controller
             $em->persist($questionMedium);
             $em->flush();
 
-            return $this->redirectToRoute('questionmedium_show', array('id' => $questionMedium->getId()));
+            return $this->redirectToRoute('questionmedium_show', array('id' => $questionMedium->getId(), 'user'=>$user));
         }
 
         return $this->render('questionmedium/new.html.twig', array(
             'questionMedium' => $questionMedium,
             'form' => $form->createView(),
+            'user'=>$user
         ));
     }
 
@@ -65,11 +71,14 @@ class QuestionMediumController extends Controller
      */
     public function showAction(QuestionMedium $questionMedium)
     {
+        $user = $this->getUser();
+
         $deleteForm = $this->createDeleteForm($questionMedium);
 
         return $this->render('questionmedium/show.html.twig', array(
             'questionMedium' => $questionMedium,
             'delete_form' => $deleteForm->createView(),
+            'user'=>$user
         ));
     }
 
@@ -81,6 +90,8 @@ class QuestionMediumController extends Controller
      */
     public function editAction(Request $request, QuestionMedium $questionMedium)
     {
+        $user = $this->getUser();
+
         $deleteForm = $this->createDeleteForm($questionMedium);
         $editForm = $this->createForm('QuizzBundle\Form\QuestionMediumType', $questionMedium);
         $editForm->handleRequest($request);
@@ -88,13 +99,14 @@ class QuestionMediumController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('questionmedium_edit', array('id' => $questionMedium->getId()));
+            return $this->redirectToRoute('questionmedium_edit', array('id' => $questionMedium->getId(), 'user'=>$user));
         }
 
         return $this->render('questionmedium/edit.html.twig', array(
             'questionMedium' => $questionMedium,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
+            'user'=>$user
         ));
     }
 

@@ -22,12 +22,15 @@ class GameController extends Controller
      */
     public function indexAction()
     {
+        $user = $this->getUser();
+
         $em = $this->getDoctrine()->getManager();
 
         $games = $em->getRepository('QuizzBundle:Game')->findAll();
 
         return $this->render('game/index.html.twig', array(
             'games' => $games,
+            'user'=>$user
         ));
     }
 
@@ -39,6 +42,8 @@ class GameController extends Controller
      */
     public function newAction(Request $request)
     {
+        $user = $this->getUser();
+
         $game = new Game();
         $form = $this->createForm('QuizzBundle\Form\GameType', $game);
         $form->handleRequest($request);
@@ -48,12 +53,13 @@ class GameController extends Controller
             $em->persist($game);
             $em->flush();
 
-            return $this->redirectToRoute('game_show', array('id' => $game->getId()));
+            return $this->redirectToRoute('game_show', array('id' => $game->getId(), 'user'=>$user));
         }
 
         return $this->render('game/new.html.twig', array(
             'game' => $game,
             'form' => $form->createView(),
+            'user'=>$user
         ));
     }
 
@@ -65,11 +71,14 @@ class GameController extends Controller
      */
     public function showAction(Game $game)
     {
+        $user = $this->getUser();
+
         $deleteForm = $this->createDeleteForm($game);
 
         return $this->render('game/show.html.twig', array(
             'game' => $game,
             'delete_form' => $deleteForm->createView(),
+            'user'=>$user
         ));
     }
 
@@ -81,6 +90,8 @@ class GameController extends Controller
      */
     public function editAction(Request $request, Game $game)
     {
+        $user = $this->getUser();
+
         $deleteForm = $this->createDeleteForm($game);
         $editForm = $this->createForm('QuizzBundle\Form\GameType', $game);
         $editForm->handleRequest($request);
@@ -88,13 +99,14 @@ class GameController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('game_edit', array('id' => $game->getId()));
+            return $this->redirectToRoute('game_edit', array('id' => $game->getId(), 'user'=>$user));
         }
 
         return $this->render('game/edit.html.twig', array(
             'game' => $game,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
+            'user'=>$user
         ));
     }
 

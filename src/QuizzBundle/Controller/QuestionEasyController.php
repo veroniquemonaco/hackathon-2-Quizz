@@ -22,12 +22,15 @@ class QuestionEasyController extends Controller
      */
     public function indexAction()
     {
+        $user = $this->getUser();
+
         $em = $this->getDoctrine()->getManager();
 
         $questionEasies = $em->getRepository('QuizzBundle:QuestionEasy')->findAll();
 
         return $this->render('questioneasy/index.html.twig', array(
             'questionEasies' => $questionEasies,
+            'user'=>$user
         ));
     }
 
@@ -39,6 +42,8 @@ class QuestionEasyController extends Controller
      */
     public function newAction(Request $request)
     {
+        $user = $this->getUser();
+
         $questionEasy = new Questioneasy();
         $form = $this->createForm('QuizzBundle\Form\QuestionEasyType', $questionEasy);
         $form->handleRequest($request);
@@ -48,12 +53,13 @@ class QuestionEasyController extends Controller
             $em->persist($questionEasy);
             $em->flush();
 
-            return $this->redirectToRoute('questioneasy_show', array('id' => $questionEasy->getId()));
+            return $this->redirectToRoute('questioneasy_show', array('id' => $questionEasy->getId(), 'user'=>$user));
         }
 
         return $this->render('questioneasy/new.html.twig', array(
             'questionEasy' => $questionEasy,
             'form' => $form->createView(),
+            'user'=>$user
         ));
     }
 
@@ -65,11 +71,14 @@ class QuestionEasyController extends Controller
      */
     public function showAction(QuestionEasy $questionEasy)
     {
+        $user = $this->getUser();
+
         $deleteForm = $this->createDeleteForm($questionEasy);
 
         return $this->render('questioneasy/show.html.twig', array(
             'questionEasy' => $questionEasy,
             'delete_form' => $deleteForm->createView(),
+            'user'=>$user
         ));
     }
 
@@ -81,6 +90,8 @@ class QuestionEasyController extends Controller
      */
     public function editAction(Request $request, QuestionEasy $questionEasy)
     {
+        $user = $this->getUser();
+
         $deleteForm = $this->createDeleteForm($questionEasy);
         $editForm = $this->createForm('QuizzBundle\Form\QuestionEasyType', $questionEasy);
         $editForm->handleRequest($request);
@@ -88,13 +99,14 @@ class QuestionEasyController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('questioneasy_edit', array('id' => $questionEasy->getId()));
+            return $this->redirectToRoute('questioneasy_edit', array('id' => $questionEasy->getId(), 'user'=>$user));
         }
 
         return $this->render('questioneasy/edit.html.twig', array(
             'questionEasy' => $questionEasy,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
+            'user'=>$user
         ));
     }
 
