@@ -181,39 +181,40 @@ class DefaultController extends Controller
     public function playerAction()
     {
         $user = $this->getUser();
-
+        $moyenne = $moyennetime = 0;
         $cat = 'Culture Générale';
         $diff = 'QuestionEasy';
 
         $em = $this->getDoctrine()->getManager();
 
 
-        if (!empty($_POST['choix'])){
+        if (!empty($_POST['choix'])) {
             $cat = $_POST['Cate'];
             $diff = $_POST['difficultee'];
         }
 
         $parties = $em->getRepository('QuizzBundle:Game')
-            ->findBy (['diff'=>$diff, 'player'=>$user->getUsername()]);
+            ->findBy(['diff' => $diff, 'player' => $user->getUsername()]);
 
         $avg = [];
-        foreach ($parties as $party){
+        foreach ($parties as $party) {
             $avg[] = $party->getScore();
         }
-
-        $moyenne =  array_sum($avg) / count($parties);
-        $moyenne *=10;
-
-        $times = $em->getRepository('QuizzBundle:Game')
-            ->findBy(['player'=>$user->getUsername()]);
-
-        $chrono = [];
-        foreach ($times as $time){
-            $chrono[] = $time->getTime();
+        if (count($parties) != 0) {
+            $moyenne = array_sum($avg) / count($parties);
+            $moyenne *= 10;
         }
 
-        $moyennetime = array_sum($chrono) / count($times);
+        $times = $em->getRepository('QuizzBundle:Game')
+            ->findBy(['player' => $user->getUsername()]);
 
+        $chrono = [];
+        foreach ($times as $time) {
+            $chrono[] = $time->getTime();
+        }
+        if (count($times) != 0) {
+            $moyennetime = array_sum($chrono) / count($times);
+        }
 
         $category = $em->getRepository('QuizzBundle:Category')
             ->findAll();
@@ -223,7 +224,7 @@ class DefaultController extends Controller
 
         return $this->render('QuizzBundle:Site:player.html.twig',
 
-            ['user'=>$user, 'categories'=>$category, 'cat'=>$cat, 'diff'=>$diff, 'gamesSolo'=>$gamesSolo, 'moyenne'=>$moyenne, 'moyennetime'=>$moyennetime]);
+            ['user' => $user, 'categories' => $category, 'cat' => $cat, 'diff' => $diff, 'gamesSolo' => $gamesSolo, 'moyenne' => $moyenne, 'moyennetime' => $moyennetime]);
 
     }
 
@@ -276,6 +277,7 @@ class DefaultController extends Controller
 
         return $this->render('QuizzBundle:Site:duel.html.twig', ['user' => $user, 'games'=>$games, 'diff'=>$diff,
             'duel'=>$duel, 'starttime'=>$starttime, 'questions'=>$questions, 'list'=>$list, 'gamesSolo'=>$gamesSolo]);
+
     }
 
     /**
@@ -341,7 +343,7 @@ class DefaultController extends Controller
             }
         }
 
-        $param = ['score' => $score, 'user' => $user, 'temps' => $timer, 'games' => $games,'positionGen' => $positionGen];
+        $param = ['score' => $score, 'user' => $user, 'temps' => $timer, 'games' => $games, 'positionGen' => $positionGen];
         return $this->render('QuizzBundle:Site:result.html.twig', $param);
     }
 

@@ -2,64 +2,67 @@
 
 
 {% block body %}
-        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="2500">
-
-            <div class="personnage">
+    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="2500">
+    <div class="personnage">
+        {% if is_granted('ROLE_ADMIN') %}
+        <a href="/app_dev.php/category">
+            {% endif %}
                 <img src="{{ asset('images/personnage.png') }}" alt="personne"/>
-            </div>
+            {% if is_granted('ROLE_ADMIN') %}
+        </a>
+        {% endif %}
+    </div>
 
-
-            <!-- Wrapper for slides -->
-            <div class="carousel-inner" role="listbox">
-                <div class="item active">
-                    <img src="{{ asset('images/slide.png') }}" alt="slide1">
-                    <div class="carousel-caption">
-                        <h2>Venez défier nos meilleurs joueurs</h2>
-                    </div>
-                </div>
-                <div class="item">
-                    <img src="{{ asset('images/slide2.png') }}" alt="slide2">
-                    <div class="carousel-caption">
-                        <h2>Ils vous attendent</h2>
-                    </div>
+    <!-- Wrapper for slides -->
+        <div class="carousel-inner" role="listbox">
+            <div class="item active">
+                <img src="{{ asset('images/slide.png') }}" alt="slide1">
+                <div class="carousel-caption">
+                    <h2>Venez défier nos meilleurs joueurs</h2>
                 </div>
             </div>
-
+            <div class="item">
+                <img src="{{ asset('images/slide2.png') }}" alt="slide2">
+                <div class="carousel-caption">
+                    <h2>Ils vous attendent</h2>
+                </div>
+            </div>
         </div>
 
-        <dv class="container">
+    </div>
 
-        <div class="row">
+    <dv class="container">
 
-
-            <a href="/app_dev.php/select"
-            type="button" class="btn btn-default bouton btn-lg btn-block">ENTRER DANS L'ARENE</a>
-        </div>
+    <div class="row">
 
 
+        <a href="/app_dev.php/select"
+           type="button" class="btn btn-default bouton btn-lg btn-block">ENTRER DANS L'ARENE</a>
+    </div>
 
-        <table class="table">
-            <thead>
-            <tr>
-                <th colspan="4">TOP 10</th>
-            </tr>
-            <tr>
-                <td class="tdRank col-lg-2"><strong>Rank</strong></td>
-                <td class="tdNom col-lg-2"><strong>Nom</strong></td>
-                <td class="tdScore col-lg-2"><strong>Score</strong></td>
-                <td class="tdScore col-lg-2"><strong>Temps</strong></td>
-            </tr>
-            </thead>
-            <tbody>
-            {% for game in games %}
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th colspan="4">TOP 10</th>
+        </tr>
+        <tr>
+            <td class="tdRank col-lg-2"><strong>Rank</strong></td>
+            <td class="tdNom col-lg-2"><strong>Nom</strong></td>
+            <td class="tdScore col-lg-2"><strong>Score</strong></td>
+            <td class="tdScore col-lg-2"><strong>Temps</strong></td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for game in games %}
             <tr>
                 <td>{{ loop.index }}</td>
                 <td>{{ game.player }}</td>
                 <td>{{ game.finalscore }}</td>
                 <td>{{ game.time }} s</td>
             </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        {% endfor %}
+        </tbody>
+    </table>
 
 {% endblock %}

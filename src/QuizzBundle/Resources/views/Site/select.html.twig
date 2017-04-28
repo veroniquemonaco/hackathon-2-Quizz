@@ -40,7 +40,7 @@
             <!-- Fin bloc HighScore -->
 
             <!-- bloc newGame -->
-            <div class="newGame">
+            <div class="newGame text-center">
                 <div class="col-lg-3 col-lg-offset-2">
                     <form action="{{ path('play') }}" method="post">
 
@@ -74,13 +74,13 @@
 
             <!-- bloc PersonnalScore -->
             <div class="personnalScore">
-                <div class="col-lg-2">
+                <div class="col-lg-2 col-lg-offset-1">
 
                     <table class="table">
                         <div class="row">
                             <thead>
                             <tr>
-                                <th colspan="4">BEST OF {{ gamesSolo[0].player|upper }}</th>
+                                <th colspan="4">BEST OF {{ user.username|upper }}</th>
                             </tr>
                             <tr>
                                 <td class="tdRank col-lg-3"><strong>Rank</strong></td>

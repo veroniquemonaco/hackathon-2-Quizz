@@ -80,6 +80,7 @@
 
                     </form>
                 </div>
+                <div id="timer">00 : 00</div>
 
                 <div class="personnageplay">
                     <img src="{{ asset('images/personnage.png') }}" alt="personne"/>
@@ -93,13 +94,13 @@
 
             <!-- bloc PersonnalScore -->
             <div class="personnalScore">
-                <div class="col-lg-2">
+                <div class="col-lg-2 col-lg-offset-1">
 
                     <table class="table">
                         <div class="row">
                             <thead>
                             <tr>
-                                <th colspan="4">BEST OF {{ gamesSolo[0].player|upper }}</th>
+                                <th colspan="4">BEST OF {{ user.username|upper }}</th>
                             </tr>
                             <tr>
                                 <td class="tdRank col-lg-3"><strong>Rank</strong></td>
@@ -125,4 +126,7 @@
         </div>
         <!-- Fin bloc PersonnalScore -->
     </div>
+{% endblock %}
+{% block javascript %}
+
 {% endblock %}
