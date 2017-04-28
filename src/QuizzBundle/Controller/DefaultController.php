@@ -52,10 +52,18 @@ class DefaultController extends Controller
         }
         shuffle($question);
         $questions = array_slice($question, 0, 10);
+
+        foreach ($questions as $question)
+        {
+            $game[] = $question->getId();
+        }
+        $game=implode(',',$game);
         $starttime = microtime(true);
 
-        $param = ['questions' => $questions, 'diff' => $_POST['difficultee'], 'user' => $user, 'starttime' => $starttime];
-        return $this->render('QuizzBundle:Site:play.html.twig', $param);
+
+        $param = ['questions'=>$questions, 'diff'=>$_POST['difficultee'], 'user'=>$user, 'starttime'=>$starttime, 'game'=>$game];
+        return $this->render('QuizzBundle:Site:play.html.twig',$param);
+
     }
 
     /**
