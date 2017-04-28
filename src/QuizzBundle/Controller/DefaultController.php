@@ -184,6 +184,7 @@ class DefaultController extends Controller
         $diff = 'Facile';
         $player = '';
 
+
         if (!empty($_POST)){
             $cat = $_POST['Cate'];
             $diff = $_POST['difficultee'];
@@ -196,17 +197,25 @@ class DefaultController extends Controller
         $category = $em->getRepository('QuizzBundle:Category')
             ->findAll();
 
-        $game = $em->getRepository('QuizzBundle:Game')
-            ->findAll();
-
         $score = $em->getRepository('QuizzBundle:Game')
+            ->findBy(['score', 'player'=>$player]);
+
+        $parties = $em->getRepository('QuizzBundle:Game')
             ->findBy (['diff'=>$diff, 'player'=>$player]);
+
+        $somme = 0;
+        foreach ($parties as $value){
+            $somme += $value;
+        }
+        $result =  $somme / $parties;
 
         $gamesSolo = $em->getRepository('QuizzBundle:Game')
             ->findBy(['player'=>$user->getUsername()], ['finalscore'=>'DESC'], 10,0);
 
         return $this->render('QuizzBundle:Site:player.html.twig',
-            ['user'=>$user, 'categories'=>$category, 'game'=>$game, 'cat'=>$cat, 'diff'=>$diff, 'score'=>$score, 'gamesSolo'=>$gamesSolo]);
+            ['user'=>$user, 'categories'=>$category, 'game'=>$game, 'cat'=>$cat, 'diff'=>$diff,
+                'score'=>$score, 'gamesSolo'=>$gamesSolo,'parties'=>$parties]);
+
     }
 
 //    public function moyenne()
