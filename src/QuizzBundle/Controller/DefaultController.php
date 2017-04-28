@@ -275,8 +275,8 @@ class DefaultController extends Controller
         $starttime = microtime(true);
         $user = $this->getUser();
 
-        return $this->render('QuizzBundle:Site:duel.html.twig', ['user' => $user, 'games'=>$games, 'diff'=>$diff,
-            'duel'=>$duel, 'starttime'=>$starttime, 'questions'=>$questions, 'list'=>$list, 'gamesSolo'=>$gamesSolo]);
+        return $this->render('QuizzBundle:Site:duel.html.twig', ['user' => $user, 'games' => $games, 'diff' => $diff,
+            'duel' => $duel, 'starttime' => $starttime, 'questions' => $questions, 'list' => $list, 'gamesSolo' => $gamesSolo]);
 
     }
 
@@ -288,12 +288,14 @@ class DefaultController extends Controller
         $user = $this->getUser();
 
         $endtime = microtime(true);
-        $starttime = $_POST['starttime'];
-        $timer = $endtime - $starttime;
-        $timer = round($timer);
-
+        if (isset($_POST['starttime'])) {
+            $starttime = $_POST['starttime'];
+            $timer = $endtime - $starttime;
+            $timer = round($timer);
+        }
         $scoreU = 0;
         $score = 0;
+        $timer = 0;
         for ($i = 1; $i <= 10; $i++) {
             if (isset($_POST['Question' . $i])) {
                 if ($_POST['Question' . $i] == $_POST['answer' . $i]) {
@@ -303,18 +305,20 @@ class DefaultController extends Controller
             }
         }
 
-        if ('QuestionEasy' == $_POST['diff']) {
-            $score = $score * 1111;
+        if (isset($_POST['diff'])) {
+            if ('QuestionEasy' == $_POST['diff']) {
+                $score = $score * 1111;
 
-        } elseif ('QuestionMedium' == $_POST['diff']) {
-            $score = $score * 2222;
+            } elseif ('QuestionMedium' == $_POST['diff']) {
+                $score = $score * 2222;
 
-        } elseif ('QuestionHard' == $_POST['diff']) {
-            $score = $score * 3333;
+            } elseif ('QuestionHard' == $_POST['diff']) {
+                $score = $score * 3333;
+            }
         }
-
-        $score = round($score / $timer);
-
+        if ($timer != 0) {
+            $score = round($score / $timer);
+        }
         if (!empty($_POST)) {
             $em = $this->getDoctrine()->getManager();
             $game = new Game();
@@ -344,7 +348,7 @@ class DefaultController extends Controller
         }
 
         $param = ['score' => $score, 'user' => $user, 'temps' => $timer, 'games' => $games, 'positionGen' => $positionGen];
-        return $this->render('QuizzBundle:Site:result.html.twig', $param);
+        return $this->render('QuizzBundle:Site:final.html.twig', $param);
     }
 
 

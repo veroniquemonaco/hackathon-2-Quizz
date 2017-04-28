@@ -51,10 +51,6 @@
 
             <h2><b>Tu a perdu ... une autre fois peut-être</b></h2>
 
-            <h2><b>Tu a fait le {{ positionGen }}{% if positionGen == 1 %}er{% else %}ème{% endif %} meilleur score de
-                    tous les temps de l'univers entier !</b></h2>
-            <h2><b>Tu a fait ton {{ positionSolo }}{% if positionSolo == 1 %}er{% else %}ème{% endif %} meilleur score
-                    !</b></h2>
 
             <form action="{{ path('select') }}" method="post">
                 <input class="btn btn-default bouton" name="valider" value="Rejouer" type="submit">
