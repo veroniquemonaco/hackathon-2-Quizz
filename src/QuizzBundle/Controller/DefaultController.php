@@ -251,12 +251,13 @@ class DefaultController extends Controller
 
         $duel->getQuestionList();
 
-        $question = explode(',', $duel);
+        $questions = explode(',', $duel);
 
 
 
         $user = $this->getUser();
-        return $this->render('QuizzBundle:Site:defis.html.twig', ['user' => $user, 'games'=>$games, 'duel'=>$duel]);
+        return $this->render('QuizzBundle:Site:defis.html.twig', ['user' => $user, 'games'=>$games, 'duel'=>$duel,
+            'questions'=>$questions]);
     }
 
     /**
