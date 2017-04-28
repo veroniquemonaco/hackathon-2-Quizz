@@ -1,9 +1,26 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
+    {{ dump() }}
 
 <div class="container-fluid">
     <div class="row">
+
+                <!-- bloc PersonnalScore -->
+        <div class="personnalScore">
+            <div class="col-lg-2">
+                <h3>PERSONAL BEST</h3>
+                <table>
+                    <div class="row">
+                        <tr class="personnalScoreTR">
+                            <td class="tdRank col-lg-2"><strong>Rank</strong></td>
+                            <td class="tdNom col-lg-2"><strong>Nom</strong></td>
+                            <td class="tdScore col-lg-2"><strong>Score</strong></td>
+                        </tr>
+                    </div>
+                </table>
+            </div>
+        </div>
 
         <!-- bloc Diagram -->
         <h1>Vos Statistiques</h1>
@@ -18,19 +35,6 @@
                     </select><br>
                 </div>
 
-
-        <!-- bloc PersonnalScore -->
-        <div class="personnalScore">
-            <div class="col-lg-2">
-                <h3>PERSONAL BEST</h3>
-                <table>
-                    <div class="row">
-                        <tr class="personnalScoreTR">
-                            <td class="tdRank col-lg-2"><strong>Rank</strong></td>
-                            <td class="tdNom col-lg-2"><strong>Nom</strong></td>
-                            <td class="tdScore col-lg-2"><strong>Score</strong></td>
-                        </tr>
-
                 <div class="col-lg-2">
                     <select name="Cate">
                         {% for categorie in categories %}
@@ -39,6 +43,7 @@
                     </select>
                 </div>
 
+                <input type="hidden" name="player" value="{{ user.username }}">
 
                 <div class="col-lg-2">
                     <input class="btn btn-success" name="choix" value="go !" type="submit">
@@ -73,7 +78,7 @@
             min: 0,
             max: 10,
             title: "{{ cat }}",
-            label: "{{ dif }}",
+            label: "{{ diff }}",
             startAnimationTime: 2000,
             startAnimationType: ">",
             refreshAnimationTime: 1000,
