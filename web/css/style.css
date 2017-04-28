@@ -96,13 +96,13 @@ h1 {
 
 .personnage{
     position:absolute;
-    bottom:0px;
+    bottom:-41px;
     left:140px;
     z-index: 1000;
 }
 
 .personnage img{
-    width:80%;
+    width:90%;
 }
 
 .table{
