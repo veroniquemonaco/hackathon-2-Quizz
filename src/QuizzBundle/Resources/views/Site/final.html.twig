@@ -43,7 +43,7 @@
         <div class="col-lg-5 col-lg-offset-1 text-center marginResult">
             <h2><b>TU A FAIT {{ score }} POINTS!!! EN {{ temps }} SECONDES!</b></h2>
 
-            {% if {{ score }} > {{ finalScore }} %}
+            {% if  score  >  finalScore  %}
             <h2><b>Tu a battu ton adversaire ! T'es pas mauvais !</b></h2>
             {% endif %}
 
@@ -51,7 +51,7 @@
             <h2><b>Tu a massacré ton adversaire et passé 1er du top classement mondial universel !</b></h2>
             {% endif %}
 
-            {% if {{ score }} < {{ finalScore }} %}
+            {% if  score  <  finalScore  %}
             <h2><b>Tu a perdu ... une autre fois peut-être</b></h2>
 
             {% endif %}
@@ -60,11 +60,11 @@
                 <input class="btn btn-default bouton" name="valider" value="Rejouer" type="submit">
             </form>
             {% if positionGen == 1 %}
-                <img src="{{ asset('../../images/genial.gif') }}" class="marginFormLogin">
-            {% elseif positionGen <= 10 %}
-                <img src="{{ asset('../../images/ouais.gif') }}" class="marginFormLogin">
-            {% else %}
-                <img src="{{ asset('../../images/nul.gif') }}" class="marginFormLogin">
+                <img src="{{ asset('../../images/fatality.gif') }}" class="marginFormLogin">
+            {% elseif score  >  finalScore %}
+                <img src="{{ asset('../../images/win.gif') }}" class="marginFormLogin">
+            {% elseif score  <  finalScore %}
+                <img src="{{ asset('../../images/cry.gif') }}" class="marginFormLogin">
             {% endif %}
         </div>
 

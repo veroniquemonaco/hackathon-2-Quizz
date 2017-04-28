@@ -292,6 +292,9 @@ class DefaultController extends Controller
     public function finalAction()
     {
         $user = $this->getUser();
+        $scoreU = 0;
+        $score = 0;
+        $timer = 0;
 
         $endtime = microtime(true);
         if (isset($_POST['starttime'])) {
@@ -299,9 +302,7 @@ class DefaultController extends Controller
             $timer = $endtime - $starttime;
             $timer = round($timer);
         }
-        $scoreU = 0;
-        $score = 0;
-        $timer = 0;
+
         for ($i = 1; $i <= 10; $i++) {
             if (isset($_POST['Question' . $i])) {
                 if ($_POST['Question' . $i] == $_POST['answer' . $i]) {
