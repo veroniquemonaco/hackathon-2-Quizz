@@ -7,36 +7,30 @@
 
             <!-- bloc HighScore -->
             <div class="highScore">
-                <div class="col-lg-offset-1 col-lg-2 col-lg-offset-2">
+                <div class="col-lg-2 col-lg-offset-1">
 
                     <table class="table">
                         <div class="row">
                             <thead>
                             <tr>
-                                <th colspan="3">HIGHSCORE</th>
+                                <th colspan="4">HIGHSCORE</th>
                             </tr>
                             <tr>
-                                <td class="tdRank col-lg-2"><strong>Rank</strong></td>
-                                <td class="tdNom col-lg-2"><strong>Nom</strong></td>
-                                <td class="tdScore col-lg-2"><strong>Score</strong></td>
+                                <td class="tdRank col-lg-3"><strong>Rank</strong></td>
+                                <td class="tdNom col-lg-3"><strong>Nom</strong></td>
+                                <td class="tdScore col-lg-3"><strong>Score</strong></td>
+                                <td class="tdScore col-lg-3"><strong>Temps</strong></td>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td class="tdRank">1</td>
-                                <td class="tdNom">zrgzrg</td>
-                                <td class="tdScore">9001</td>
-                            </tr>
-                            <tr>
-                                <td class="tdRank">2</td>
-                                <td class="tdNom">dghthdht</td>
-                                <td class="tdScore">5</td>
-                            </tr>
-                            <tr>
-                                <td class="tdRank">3</td>
-                                <td class="tdNom">zzrgzrhg</td>
-                                <td class="tdScore">4</td>
-                            </tr>
+                            {% for game2 in games2 %}
+                                <tr>
+                                    <td>{{ loop.index }}</td>
+                                    <td>{{ game2.player }}</td>
+                                    <td>{{ game2.finalscore }}</td>
+                                    <td>{{ game2.time }} s</td>
+                                </tr>
+                            {% endfor %}
                             </tbody>
                         </div>
                     </table>
@@ -93,19 +87,7 @@
 
             </div>
 
-            <!-- Modal -->
-            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-body">
-                            <p>Je crois pas!</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
 
             <!-- Fin bloc carousel question -->
 
@@ -117,30 +99,22 @@
                         <div class="row">
                             <thead>
                             <tr>
-                                <th colspan="3">PERSONAL SCORES</th>
+                                <th colspan="4">BEST OF {{ gamesSolo[0].player|upper }}</th>
                             </tr>
                             <tr>
-                                <td class="tdRank col-lg-2"><strong>Rank</strong></td>
-                                <td class="tdNom col-lg-2"><strong>Nom</strong></td>
-                                <td class="tdScore col-lg-2"><strong>Score</strong></td>
+                                <td class="tdRank col-lg-3"><strong>Rank</strong></td>
+                                <td class="tdScore col-lg-3"><strong>Score</strong></td>
+                                <td class="tdScore col-lg-3"><strong>Temps</strong></td>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td class="tdRank">1</td>
-                                <td class="tdNom">zrgzrg</td>
-                                <td class="tdScore">9001</td>
-                            </tr>
-                            <tr>
-                                <td class="tdRank">2</td>
-                                <td class="tdNom">dghthdht</td>
-                                <td class="tdScore">5</td>
-                            </tr>
-                            <tr>
-                                <td class="tdRank">3</td>
-                                <td class="tdNom">zzrgzrhg</td>
-                                <td class="tdScore">4</td>
-                            </tr>
+                            {% for gameSolo in gamesSolo %}
+                                <tr>
+                                    <td>{{ loop.index }}</td>
+                                    <td>{{ gameSolo.finalscore }}</td>
+                                    <td>{{ gameSolo.time }} s</td>
+                                </tr>
+                            {% endfor %}
                             </tbody>
                         </div>
                     </table>

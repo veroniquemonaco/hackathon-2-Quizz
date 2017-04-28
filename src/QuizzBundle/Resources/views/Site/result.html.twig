@@ -8,43 +8,42 @@
             <!-- bloc HighScore -->
             <div class="highScore">
                 <div class="col-lg-2 col-lg-offset-1">
-                    <h3>HIGHSCORE</h3>
-                    <table>
+
+                    <table class="table">
                         <div class="row">
-                            <tr class="highScoreTR">
-                                <td class="tdRank col-lg-2">Rank</td>
-                                <td class="tdNom col-lg-2">Nom</td>
-                                <td class="tdScore col-lg-2">Score</td>
+                            <thead>
+                            <tr>
+                                <th colspan="4">HIGHSCORE</th>
                             </tr>
-
+                            <tr>
+                                <td class="tdRank col-lg-3"><strong>Rank</strong></td>
+                                <td class="tdNom col-lg-3"><strong>Nom</strong></td>
+                                <td class="tdScore col-lg-3"><strong>Score</strong></td>
+                                <td class="tdScore col-lg-3"><strong>Temps</strong></td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for game in games %}
+                                <tr>
+                                    <td>{{ loop.index }}</td>
+                                    <td>{{ game.player }}</td>
+                                    <td>{{ game.finalscore }}</td>
+                                    <td>{{ game.time }} s</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
                         </div>
-
-                        <tr>
-                            <td class="tdRank">1</td>
-                            <td class="tdNom">zrgzrg</td>
-                            <td class="tdScore">9001</td>
-                        </tr>
-                        <tr>
-                            <td class="tdRank">2</td>
-                            <td class="tdNom">dghthdht</td>
-                            <td class="tdScore">5</td>
-                        </tr>
-                        <tr>
-                            <td class="tdRank">3</td>
-                            <td class="tdNom">zzrgzrhg</td>
-                            <td class="tdScore">4</td>
-                        </tr>
-
                     </table>
+
                 </div>
             </div>
             <!-- Fin bloc HighScore -->
 
             <!-- bloc Results -->
-            <div class="col-lg-6 text-center">
+            <div class="col-lg-5 col-lg-offset-1 text-center marginResult">
                 <h2><b>TU A FAIT {{ score }} POINTS!!! EN {{ temps }} SECONDES!</b></h2>
-                <h2><b>Tu a fait le 23e meilleur score de tous les temps de l'univers entier</b></h2>
-                <h2><b>Tu a fait ton 4e meilleur score</b></h2>
+                <h2><b>Tu a fait le {{ positionGen }}ème meilleur score de tous les temps de l'univers entier !</b></h2>
+                <h2><b>Tu a fait ton {{ positionSolo }}ème meilleur score !</b></h2>
                 <form action="{{ path('select') }}" method="post">
                     <input class="btn btn-default bouton" name="valider" value="Rejouer" type="submit">
                 </form>
@@ -55,37 +54,34 @@
             <!-- bloc PersonnalScore -->
             <div class="personnalScore">
                 <div class="col-lg-2">
-                    <h3>PERSONAL BEST</h3>
-                    <table>
+
+                    <table class="table">
                         <div class="row">
-                            <tr class="personnalScoreTR">
-                                <td class="tdRank col-lg-2">Rank</td>
-                                <td class="tdNom col-lg-2">Nom</td>
-                                <td class="tdScore col-lg-2">Score</td>
+                            <thead>
+                            <tr>
+                                <th colspan="4">BEST OF {{ gamesSolo[0].player|upper }}</th>
                             </tr>
-
+                            <tr>
+                                <td class="tdRank col-lg-3"><strong>Rank</strong></td>
+                                <td class="tdScore col-lg-3"><strong>Score</strong></td>
+                                <td class="tdScore col-lg-3"><strong>Temps</strong></td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for gameSolo in gamesSolo %}
+                                <tr>
+                                    <td>{{ loop.index }}</td>
+                                    <td>{{ gameSolo.finalscore }}</td>
+                                    <td>{{ gameSolo.time }} s</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
                         </div>
-
-                        <tr>
-                            <td class="tdRank">1</td>
-                            <td class="tdNom">zrgzrg</td>
-                            <td class="tdScore">9001</td>
-                        </tr>
-                        <tr>
-                            <td class="tdRank">2</td>
-                            <td class="tdNom">dghthdht</td>
-                            <td class="tdScore">5</td>
-                        </tr>
-                        <tr>
-                            <td class="tdRank">3</td>
-                            <td class="tdNom">zzrgzrhg</td>
-                            <td class="tdScore">4</td>
-                        </tr>
-
                     </table>
+
+
                 </div>
             </div>
-        </div>
         <!-- Fin bloc PersonnalScore -->
     </div>
 {% endblock %}
