@@ -63,6 +63,7 @@ h1 {
 
 .navbar-default .navbar-text {
     color:#ffffff;
+    text-shadow: 0px 0px 9px #777;
     font-size: 2em;
     padding-left: 200px;
     font-weight: 600;
@@ -74,11 +75,23 @@ h1 {
     color:#000000;
     font-size: 70px;
     margin-bottom: 150px;
+    text-shadow: 0px 0px 9px #777;
+
 }
 
 
 .carousel-inner{
     background-color: rgba(0,0,0,0);
+}
+
+.personnage{
+    position:absolute;
+    bottom:0px;
+    left:140px;
+}
+
+.personnage img{
+    width:80%;
 }
 
 .table{
@@ -140,5 +153,31 @@ h1 {
 
 .col-lg-3.col-lg-offset-2 h3{
     font-weight: 800;
+}
+
+.col-lg-3.col-lg-offset-2 h4{
+    font-weight: 800;
+}
+
+.personnagelist{
+    margin-top:50px;
+}
+
+.personnagelist img{
+    width:45%;
+}
+
+.col-lg-offset-1.col-lg-4.play{
+    margin-top:35px;
+}
+
+.personnageplay{
+    position:absolute;
+    left:225px;
+    margin-top:50px;
+}
+
+.personnageplay img{
+    width:70%;
 }
 
