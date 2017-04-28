@@ -4,21 +4,20 @@
 
 <div class="container-fluid">
     <div class="row">
-        <!-- bloc Diagram -->
-        <div class="diagram">
-            <div id="gauge" class="200x160px"></div>
-        </div>
-    <div class="col-xs-12 text-center">
-        <div class="col-sm-offset-1 col-sm-10 text-center ">
-            <div id="gauge1" class="text-center" style="margin:0 auto; width: 200px; height: 150px;"></div>
-            </div>
-        </div>
 
-        <div class="col-sm-offset-1 col-sm-10 text-center ">
-            <div id="gauge2" class="text-center" style="margin:0 auto; width: 200px; height: 150px;"></div>
-        </div>
-    </div>
-    </div>
+        <!-- bloc Diagram -->
+        <h1>Vos Statistiques</h1>
+
+        <div class="col-lg-9 col-lg-offset-3 text-center">
+            <form action="" method="post">
+                <div class="col-lg-2">
+                    <select name="difficultee">
+                            <option value="QuestionEasy">Facile</option>
+                            <option value="QuestionMedium">Moyen</option>
+                            <option value="QuestionHard">Difficle</option>
+                    </select><br>
+                </div>
+
 
         <!-- bloc PersonnalScore -->
         <div class="personnalScore">
@@ -32,28 +31,31 @@
                             <td class="tdScore col-lg-2"><strong>Score</strong></td>
                         </tr>
 
-                    </div>
+                <div class="col-lg-2">
+                    <select name="Cate">
+                        {% for categorie in categories %}
+                            <option value="{{ categorie.name }}">{{ categorie.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
 
-                    <tr>
-                        <td class="tdRank">1</td>
-                        <td class="tdNom">zrgzrg</td>
-                        <td class="tdScore">9001</td>
-                    </tr>
-                    <tr>
-                        <td class="tdRank">2</td>
-                        <td class="tdNom">dghthdht</td>
-                        <td class="tdScore">5</td>
-                    </tr>
-                    <tr>
-                        <td class="tdRank">3</td>
-                        <td class="tdNom">zzrgzrhg</td>
-                        <td class="tdScore">4</td>
-                    </tr>
 
-                </table>
+                <div class="col-lg-2">
+                    <input class="btn btn-success" name="choix" value="go !" type="submit">
+                </div>
+            </form>
+        </div>
+
+        <div class="col-lg-4 col-lg-offset-2 text-center">
+            <div class="col-sm-offset-1 col-sm-10 text-center ">
+                <div id="gauge1" class="text-center" style="margin:0 auto; width: 200px; height: 150px;"></div>
+                </div>
+            </div>
+
+            <div class="col-sm-offset-1 col-sm-10 text-center ">
+                <div id="gauge2" class="text-center" style="margin:0 auto; width: 200px; height: 150px;"></div>
             </div>
         </div>
-        <!-- Fin bloc PersonnalScore -->
     </div>
 </div>
 {% endblock %}
@@ -63,4 +65,19 @@
     <script src="{{ asset('js/raphael-2.1.4.min.js') }}"></script>
     <script src="{{ asset('js/justgage.js') }}"></script>
     <script src="{{ asset('js/script.js') }}"></script>
+
+    <script>
+        var g = new JustGage({
+            id: "gauge1",
+            value: 17,
+            min: 0,
+            max: 100,
+            title: "{{ cat }}",
+            label: "test",
+            startAnimationTime: 2000,
+            startAnimationType: ">",
+            refreshAnimationTime: 1000,
+            refreshAnimationType: "bounce"
+        });
+    </script>
 {% endblock %}
