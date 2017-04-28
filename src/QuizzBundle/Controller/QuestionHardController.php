@@ -22,12 +22,15 @@ class QuestionHardController extends Controller
      */
     public function indexAction()
     {
+        $user = $this->getUser();
+
         $em = $this->getDoctrine()->getManager();
 
         $questionHards = $em->getRepository('QuizzBundle:QuestionHard')->findAll();
 
         return $this->render('questionhard/index.html.twig', array(
             'questionHards' => $questionHards,
+            'user'=>$user
         ));
     }
 
@@ -39,6 +42,8 @@ class QuestionHardController extends Controller
      */
     public function newAction(Request $request)
     {
+        $user = $this->getUser();
+
         $questionHard = new Questionhard();
         $form = $this->createForm('QuizzBundle\Form\QuestionHardType', $questionHard);
         $form->handleRequest($request);
@@ -48,12 +53,13 @@ class QuestionHardController extends Controller
             $em->persist($questionHard);
             $em->flush();
 
-            return $this->redirectToRoute('questionhard_show', array('id' => $questionHard->getId()));
+            return $this->redirectToRoute('questionhard_show', array('id' => $questionHard->getId(), 'user'=>$user));
         }
 
         return $this->render('questionhard/new.html.twig', array(
             'questionHard' => $questionHard,
             'form' => $form->createView(),
+            'user'=>$user
         ));
     }
 
@@ -65,11 +71,14 @@ class QuestionHardController extends Controller
      */
     public function showAction(QuestionHard $questionHard)
     {
+        $user = $this->getUser();
+
         $deleteForm = $this->createDeleteForm($questionHard);
 
         return $this->render('questionhard/show.html.twig', array(
             'questionHard' => $questionHard,
             'delete_form' => $deleteForm->createView(),
+            'user'=>$user
         ));
     }
 
@@ -81,6 +90,8 @@ class QuestionHardController extends Controller
      */
     public function editAction(Request $request, QuestionHard $questionHard)
     {
+        $user = $this->getUser();
+
         $deleteForm = $this->createDeleteForm($questionHard);
         $editForm = $this->createForm('QuizzBundle\Form\QuestionHardType', $questionHard);
         $editForm->handleRequest($request);
@@ -88,13 +99,14 @@ class QuestionHardController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('questionhard_edit', array('id' => $questionHard->getId()));
+            return $this->redirectToRoute('questionhard_edit', array('id' => $questionHard->getId(), 'user'=>$user));
         }
 
         return $this->render('questionhard/edit.html.twig', array(
             'questionHard' => $questionHard,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
+            'user'=>$user
         ));
     }
 
