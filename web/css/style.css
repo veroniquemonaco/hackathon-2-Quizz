@@ -219,3 +219,26 @@ h1 {
     transition: all .3s ease;
 }
 
+
+.navAdmin:hover, .navAdmin:active, .navAdmin, .navAdmin:focus, .navAdmin:visited {
+    color: #ddd;
+    text-decoration: none;
+    font-size: 25px;
+    margin: 0 20px;
+}
+
+h3 {
+    color: #DDDDDD;
+}
+
+
+.navbar-default .navbar-nav > li > a, .navbar-default .navbar-nav > li > a:hover,.navbar-default .navbar-nav > li > a:visited {
+    color: #ddd;
+    font-size: 25px;
+}
+
+.titre {
+    margin-left: -40px;
+    font-size: 30px;
+    font-weight: normal;
+}
