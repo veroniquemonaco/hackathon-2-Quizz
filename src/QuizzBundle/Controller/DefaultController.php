@@ -133,9 +133,13 @@ class DefaultController extends Controller
     public function playerAction()
     {
         $cat= 'Culture Générale';
+        $dif = 'Facile';
         if (!empty($_POST)){
             $cat = $_POST['Cate'];
+            $dif = $_POST['difficultee'];
         }
+
+        $moyScore = $this->moyenne();
 
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
@@ -144,7 +148,20 @@ class DefaultController extends Controller
         $game = $em->getRepository('QuizzBundle:Game')
             ->findAll();
 
-        return $this->render('QuizzBundle:Site:player.html.twig', ['user'=>$user, 'categories'=>$category, 'game'=>$game, 'cat'=>$cat]);
+        return $this->render('QuizzBundle:Site:player.html.twig',
+            ['user'=>$user, 'categories'=>$category, 'game'=>$game, 'cat'=>$cat, 'dif'=>$dif]);
+    }
+
+    public function moyenne()
+    {
+        $Nombres = func_get_args();
+        $Nb = sizeof($Nombres);
+        $Somme = 0;
+        foreach ($Nombres as $Valeur)
+        {
+            $Somme += $Valeur;
+        }
+        return ($Somme / $Nb);
     }
 
 }
