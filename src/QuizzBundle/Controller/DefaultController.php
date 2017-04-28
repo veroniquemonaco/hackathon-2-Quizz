@@ -2,6 +2,7 @@
 
 namespace QuizzBundle\Controller;
 
+use QuizzBundle\Entity\Game;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use QuizzBundle\Entity\Category;
@@ -93,7 +94,15 @@ class DefaultController extends Controller
         $score = $score / $timer;
 
         if (!empty($_POST)) {
-
+            $em = $this->getDoctrine()->getManager();
+            $game = new Game();
+            $game->setFinalscore($score);
+            $game->setPlayer($user->getUsername());
+            $game->setScore($scoreU);
+            $game->setTime($timer);
+            $game->setQuestionList($_POST['game']);
+            $em->persist($game);
+            $em->flush();
         }
 
         $param = ['score' => $score, 'user' => $user, 'temps' => $timer];

@@ -50,7 +50,6 @@
                 <div id="carousel" class="carousel slide fade in" data-ride="carousel" data-interval="false">
                     <form action="{{ path('result') }}" method="post">
                         <div class="carousel-inner" role="listbox">
-
                             {% for question in questions %}
                                 <div class="item {% if loop.index == 1 %}active{% endif %}">
                                     <div class="caption text-center">
