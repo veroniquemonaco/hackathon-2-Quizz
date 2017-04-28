@@ -106,8 +106,19 @@ class DefaultController extends Controller
      */
     public function playerAction()
     {
+        $cat= 'Culture Générale';
+        if (!empty($_POST)){
+            $cat = $_POST['Cate'];
+        }
+
         $user = $this->getUser();
-        return $this->render('QuizzBundle:Site:player.html.twig', ['user' => $user]);
+        $em = $this->getDoctrine()->getManager();
+        $category = $em->getRepository('QuizzBundle:Category')
+            ->findAll();
+        $game = $em->getRepository('QuizzBundle:Game')
+            ->findAll();
+
+        return $this->render('QuizzBundle:Site:player.html.twig', ['user'=>$user, 'categories'=>$category, 'game'=>$game, 'cat'=>$cat]);
     }
 
 }
