@@ -4,6 +4,14 @@
     padding: 0;
 }
 
+.row {
+    margin: 0;
+}
+
+.back {
+    min-height: 100vh;
+}
+
 .navbar {
     border: none;
     border-radius: 0;
@@ -11,18 +19,16 @@
 
 body {
     font-family: Montserat;
+    background-image: url("../images/backgroundslide.jpeg");
+    background-repeat: no-repeat;
+    background-position: center;
+
 }
 
 h1 {
     color: #745698;
     font-weight: bold;
     text-transform: uppercase;
-}
-
-body{
-    background-image: url("../images/backgroundslide.jpeg");
-    background-repeat: no-repeat;
-    background-position: center;
 }
 
 .banniere{
@@ -55,9 +61,11 @@ body{
     color:#ffffff;
 }
 
-.navbar-text.titre p{
+.navbar-default .navbar-text {
     color:#ffffff;
     font-size: 2em;
+    padding-left: 200px;
+    font-weight: 600;
 }
 
 /*index.html.twig Accueil du site*/
@@ -110,7 +118,9 @@ body{
 }
 
 .bouton {
-
+    background-color: #745698;
+    color: #ddd;
+    margin-top: 20px;
 }
 
 .marginNom {
@@ -119,5 +129,16 @@ body{
 
 .marginFormLogin {
     margin: 30px auto;
+}
+
+
+/*page select */
+
+.col-lg-3.col-lg-offset-2 {
+    margin-top:50px;
+}
+
+.col-lg-3.col-lg-offset-2 h3{
+    font-weight: 800;
 }
 

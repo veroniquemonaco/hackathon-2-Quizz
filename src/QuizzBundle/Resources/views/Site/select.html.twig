@@ -8,17 +8,20 @@
             <!-- bloc HighScore -->
             <div class="highScore">
                 <div class="col-lg-2 col-lg-offset-1">
-                    <h3>HIGHSCORE</h3>
-                    <table>
+
+                    <table class="table">
                         <div class="row">
-                            <tr class="highScoreTR">
-                                <td class="tdRank col-lg-2">Rank</td>
-                                <td class="tdNom col-lg-2">Nom</td>
-                                <td class="tdScore col-lg-2">Score</td>
-                            </tr>
-
-                        </div>
-
+                        <thead>
+                        <tr>
+                            <th colspan="3">HIGHSCORE</th>
+                        </tr>
+                        <tr>
+                            <td class="tdRank col-lg-2">Rank</td>
+                            <td class="tdNom col-lg-2">Nom</td>
+                            <td class="tdScore col-lg-2">Score</td>
+                        </tr>
+                        </thead>
+                        <tbody>
                         <tr>
                             <td class="tdRank">1</td>
                             <td class="tdNom">zrgzrg</td>
@@ -34,21 +37,25 @@
                             <td class="tdNom">zzrgzrhg</td>
                             <td class="tdScore">4</td>
                         </tr>
-
+                        </tbody>
+                        </div>
                     </table>
+
                 </div>
             </div>
             <!-- Fin bloc HighScore -->
 
             <!-- bloc newGame -->
             <div class="newGame">
-                <div class="col-lg-4 col-lg-offset-2">
+                <div class="col-lg-3 col-lg-offset-2">
                     <form action="{{ path('play') }}" method="post">
-                        <h4>Difficultée</h4>
+
+                        <h3>Niveau de difficulté</h3>
+
                         <select name="difficultee">
-                            <option value="QuestionEasy">facile</option>
-                            <option value="QuestionMedium">moyen</option>
-                            <option value="QuestionHard">difficle</option>
+                            <option value="QuestionEasy">Facile</option>
+                            <option value="QuestionMedium">Moyen</option>
+                            <option value="QuestionHard">Difficle</option>
                         </select><br>
 
                         <h4>Catégorie</h4>
@@ -60,7 +67,7 @@
                             {% endfor %}
                         </select><br><br>
 
-                        <input class="btn btn-success" name="play" value="Démarrer" type="submit">
+                        <input class="btn btn-default bouton" name="play" value="Démarrer" type="submit">
                     </form>
                 </div>
             </div>
@@ -69,34 +76,40 @@
             <!-- bloc PersonnalScore -->
             <div class="personnalScore">
                 <div class="col-lg-2">
-                    <h3>PERSONAL BEST</h3>
-                    <table>
+
+                    <table class="table">
                         <div class="row">
-                            <tr class="personnalScoreTR">
+                            <thead>
+                            <tr>
+                                <th colspan="3">PERSONAL SCORES</th>
+                            </tr>
+                            <tr>
                                 <td class="tdRank col-lg-2">Rank</td>
                                 <td class="tdNom col-lg-2">Nom</td>
                                 <td class="tdScore col-lg-2">Score</td>
                             </tr>
-
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td class="tdRank">1</td>
+                                <td class="tdNom">zrgzrg</td>
+                                <td class="tdScore">9001</td>
+                            </tr>
+                            <tr>
+                                <td class="tdRank">2</td>
+                                <td class="tdNom">dghthdht</td>
+                                <td class="tdScore">5</td>
+                            </tr>
+                            <tr>
+                                <td class="tdRank">3</td>
+                                <td class="tdNom">zzrgzrhg</td>
+                                <td class="tdScore">4</td>
+                            </tr>
+                            </tbody>
                         </div>
-
-                        <tr>
-                            <td class="tdRank">1</td>
-                            <td class="tdNom">zrgzrg</td>
-                            <td class="tdScore">9001</td>
-                        </tr>
-                        <tr>
-                            <td class="tdRank">2</td>
-                            <td class="tdNom">dghthdht</td>
-                            <td class="tdScore">5</td>
-                        </tr>
-                        <tr>
-                            <td class="tdRank">3</td>
-                            <td class="tdNom">zzrgzrhg</td>
-                            <td class="tdScore">4</td>
-                        </tr>
-
                     </table>
+
+
                 </div>
             </div>
             <!-- Fin bloc PersonnalScore -->

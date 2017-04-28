@@ -35,6 +35,9 @@ security:
         - { path: ^/play$, role: ROLE_USER }
         - { path: ^/result, role: ROLE_USER }
         - { path: ^/player, role: ROLE_USER }
-        - { path: ^/admin/, role: ROLE_ADMIN }
+        - { path: ^/category/, role: ROLE_ADMIN }
+        - { path: ^/questioneasy, role: ROLE_ADMIN }
+        - { path: ^/questionmedium, role: ROLE_ADMIN }
+        - { path: ^/questionhard, role: ROLE_ADMIN }
         - { path: ^/, role: IS_AUTHENTICATED_ANONYMOUSLY }
 

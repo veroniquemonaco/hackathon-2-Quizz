@@ -7,41 +7,46 @@
 
             <!-- bloc HighScore -->
             <div class="highScore">
-                <div class="col-lg-2 col-lg-offset-1">
-                    <h3>HIGHSCORE</h3>
-                    <table>
+                <div class="col-lg-offset-1 col-lg-2 col-lg-offset-2">
+
+                    <table class="table">
                         <div class="row">
-                            <tr class="highScoreTR">
+                            <thead>
+                            <tr>
+                                <th colspan="3">HIGHSCORE</th>
+                            </tr>
+                            <tr>
                                 <td class="tdRank col-lg-2">Rank</td>
                                 <td class="tdNom col-lg-2">Nom</td>
                                 <td class="tdScore col-lg-2">Score</td>
                             </tr>
-
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td class="tdRank">1</td>
+                                <td class="tdNom">zrgzrg</td>
+                                <td class="tdScore">9001</td>
+                            </tr>
+                            <tr>
+                                <td class="tdRank">2</td>
+                                <td class="tdNom">dghthdht</td>
+                                <td class="tdScore">5</td>
+                            </tr>
+                            <tr>
+                                <td class="tdRank">3</td>
+                                <td class="tdNom">zzrgzrhg</td>
+                                <td class="tdScore">4</td>
+                            </tr>
+                            </tbody>
                         </div>
-
-                        <tr>
-                            <td class="tdRank">1</td>
-                            <td class="tdNom">zrgzrg</td>
-                            <td class="tdScore">9001</td>
-                        </tr>
-                        <tr>
-                            <td class="tdRank">2</td>
-                            <td class="tdNom">dghthdht</td>
-                            <td class="tdScore">5</td>
-                        </tr>
-                        <tr>
-                            <td class="tdRank">3</td>
-                            <td class="tdNom">zzrgzrhg</td>
-                            <td class="tdScore">4</td>
-                        </tr>
-
                     </table>
+
                 </div>
             </div>
             <!-- Fin bloc HighScore -->
 
             <!-- bloc carousel question -->
-            <div class="col-lg-6">
+            <div class="col-lg-offset-1 col-lg-4">
                 <div id="carousel" class="carousel slide fade in" data-ride="carousel" data-interval="false">
                     <form action="{{ path('result') }}" method="post">
                         <div class="carousel-inner" role="listbox">
@@ -61,10 +66,10 @@
                                         <input type="hidden" name="answer{{ loop.index }}"
                                                value="{{ question.goodanswer }}"><br/>
                                         {% if loop.last %}
-                                            <input class="btn btn-success" name="valider" value="Terminer le Quizz"
+                                            <input class="btn btn-default bouton" name="valider" value="Terminer le Quizz"
                                                    type="submit">
                                         {% else %}
-                                            <a href="#carousel" class="btn btn-default" role="button" data-slide="next">Question
+                                            <a href="#carousel" class="btn btn-default bouton" role="button" data-slide="next">Question
                                                 suivante</a>
                                         {% endif %}
                                     </div>
@@ -104,34 +109,40 @@
             <!-- bloc PersonnalScore -->
             <div class="personnalScore">
                 <div class="col-lg-2">
-                    <h3>PERSONAL BEST</h3>
-                    <table>
+
+                    <table class="table">
                         <div class="row">
-                            <tr class="personnalScoreTR">
+                            <thead>
+                            <tr>
+                                <th colspan="3">PERSONAL SCORES</th>
+                            </tr>
+                            <tr>
                                 <td class="tdRank col-lg-2">Rank</td>
                                 <td class="tdNom col-lg-2">Nom</td>
                                 <td class="tdScore col-lg-2">Score</td>
                             </tr>
-
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td class="tdRank">1</td>
+                                <td class="tdNom">zrgzrg</td>
+                                <td class="tdScore">9001</td>
+                            </tr>
+                            <tr>
+                                <td class="tdRank">2</td>
+                                <td class="tdNom">dghthdht</td>
+                                <td class="tdScore">5</td>
+                            </tr>
+                            <tr>
+                                <td class="tdRank">3</td>
+                                <td class="tdNom">zzrgzrhg</td>
+                                <td class="tdScore">4</td>
+                            </tr>
+                            </tbody>
                         </div>
-
-                        <tr>
-                            <td class="tdRank">1</td>
-                            <td class="tdNom">zrgzrg</td>
-                            <td class="tdScore">9001</td>
-                        </tr>
-                        <tr>
-                            <td class="tdRank">2</td>
-                            <td class="tdNom">dghthdht</td>
-                            <td class="tdScore">5</td>
-                        </tr>
-                        <tr>
-                            <td class="tdRank">3</td>
-                            <td class="tdNom">zzrgzrhg</td>
-                            <td class="tdScore">4</td>
-                        </tr>
-
                     </table>
+
+
                 </div>
             </div>
         </div>

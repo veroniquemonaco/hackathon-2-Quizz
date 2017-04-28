@@ -24,11 +24,12 @@ class CategoryController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
 
         $categories = $em->getRepository('QuizzBundle:Category')->findAll();
 
         return $this->render('category/index.html.twig', array(
-            'categories' => $categories,
+            'categories' => $categories, 'user'=>$user
         ));
     }
 
@@ -40,6 +41,8 @@ class CategoryController extends Controller
      */
     public function newAction(Request $request)
     {
+        $user = $this->getUser();
+
         $category = new Category();
         $form = $this->createForm('QuizzBundle\Form\CategoryType', $category);
         $form->handleRequest($request);
@@ -49,12 +52,13 @@ class CategoryController extends Controller
             $em->persist($category);
             $em->flush();
 
-            return $this->redirectToRoute('category_show', array('id' => $category->getId()));
+            return $this->redirectToRoute('category_show', array('id' => $category->getId(), 'user'=>$user));
         }
 
         return $this->render('category/new.html.twig', array(
             'category' => $category,
             'form' => $form->createView(),
+            'user'=>$user
         ));
     }
 
@@ -66,11 +70,14 @@ class CategoryController extends Controller
      */
     public function showAction(Category $category)
     {
+        $user = $this->getUser();
+
         $deleteForm = $this->createDeleteForm($category);
 
         return $this->render('category/show.html.twig', array(
             'category' => $category,
             'delete_form' => $deleteForm->createView(),
+            'user'=>$user
         ));
     }
 
@@ -82,6 +89,8 @@ class CategoryController extends Controller
      */
     public function editAction(Request $request, Category $category)
     {
+        $user = $this->getUser();
+
         $deleteForm = $this->createDeleteForm($category);
         $editForm = $this->createForm('QuizzBundle\Form\CategoryType', $category);
         $editForm->handleRequest($request);
@@ -89,13 +98,14 @@ class CategoryController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('category_edit', array('id' => $category->getId()));
+            return $this->redirectToRoute('category_edit', array('id' => $category->getId(), 'user'=>$user));
         }
 
         return $this->render('category/edit.html.twig', array(
             'category' => $category,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
+            'user'=>$user
         ));
     }
 
