@@ -1,7 +1,7 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-    {{ dump() }}
+    {#{{ dump() }}#}
 
 <div class="container-fluid">
     <div class="row">
@@ -40,7 +40,7 @@
         <h1>Vos Statistiques</h1>
 
         <div class="col-lg-9 col-lg-offset-3 text-center">
-            <form action="" method="post">
+            <form action="{{ path('player') }}" method="post">
                 <div class="col-lg-2">
                     <select name="difficultee">
                             <option value="QuestionEasy">Facile</option>
@@ -89,11 +89,24 @@
     <script>
         var g = new JustGage({
             id: "gauge1",
-            value: 7,
+            value: {{ moyenne }},
             min: 0,
-            max: 10,
+            max: 100,
             title: "{{ cat }}",
             label: "{{ diff }}",
+            startAnimationTime: 2000,
+            startAnimationType: ">",
+            refreshAnimationTime: 1000,
+            refreshAnimationType: "bounce"
+        });
+
+        var g = new JustGage({
+            id: "gauge2",
+            value: {{ moyennetime }},
+            min: 0,
+            max: 100,
+            title: "Temps Moyen",
+            label: "",
             startAnimationTime: 2000,
             startAnimationType: ">",
             refreshAnimationTime: 1000,

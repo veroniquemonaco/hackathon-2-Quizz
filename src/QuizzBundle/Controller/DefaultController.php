@@ -146,54 +146,50 @@ class DefaultController extends Controller
     {
         $user = $this->getUser();
 
-        $cat= 'Culture Générale';
-        $diff = 'Facile';
-        $player = '';
-
-
-        if (!empty($_POST)){
-            $cat = $_POST['Cate'];
-            $diff = $_POST['difficultee'];
-            $player = $_POST['player'];
-        }
-
+        $cat = 'Culture Générale';
+        $diff = 'QuestionEasy';
+        $time = '10';
 
         $em = $this->getDoctrine()->getManager();
 
-        $category = $em->getRepository('QuizzBundle:Category')
-            ->findAll();
 
-        $score = $em->getRepository('QuizzBundle:Game')
-            ->findBy(['score', 'player'=>$player]);
+        if (!empty($_POST['choix'])){
+            $cat = $_POST['Cate'];
+            $diff = $_POST['difficultee'];
+        }
 
         $parties = $em->getRepository('QuizzBundle:Game')
-            ->findBy (['diff'=>$diff, 'player'=>$player]);
+            ->findBy (['diff'=>$diff, 'player'=>$user->getUsername()]);
 
-        $somme = 0;
-        foreach ($parties as $value){
-            $somme += $value;
+        $avg = [];
+        foreach ($parties as $party){
+            $avg[] = $party->getScore();
         }
-        $result =  $somme / $parties;
+
+        $moyenne =  array_sum($avg) / count($parties);
+        $moyenne *=10;
+
+        $times = $em->getRepository('QuizzBundle:Game')
+            ->findBy(['player'=>$user->getUsername()]);
+
+        $chrono = [];
+        foreach ($times as $time){
+            $chrono[] = $time->getTime();
+        }
+
+        $moyennetime = array_sum($chrono) / count($times);
+
+
+        $category = $em->getRepository('QuizzBundle:Category')
+            ->findAll();
 
         $gamesSolo = $em->getRepository('QuizzBundle:Game')
             ->findBy(['player'=>$user->getUsername()], ['finalscore'=>'DESC'], 10,0);
 
         return $this->render('QuizzBundle:Site:player.html.twig',
-            ['user'=>$user, 'categories'=>$category, 'game'=>$game, 'cat'=>$cat, 'diff'=>$diff,
-                'score'=>$score, 'gamesSolo'=>$gamesSolo,'parties'=>$parties]);
+            ['user'=>$user, 'categories'=>$category, 'cat'=>$cat, 'diff'=>$diff, 'gamesSolo'=>$gamesSolo, 'moyenne'=>$moyenne, 'moyennetime'=>$moyennetime]);
 
     }
 
-//    public function moyenne()
-//    {
-//        $Nombres = func_get_args();
-//        $Nb = sizeof($Nombres);
-//        $Somme = 0;
-//        foreach ($Nombres as $Valeur)
-//        {
-//            $Somme += $Valeur;
-//        }
-//        return ($Somme / $Nb);
-//    }
 
 }
