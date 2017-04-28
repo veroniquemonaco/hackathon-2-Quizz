@@ -1,8 +1,13 @@
 {% trans_default_domain 'FOSUserBundle' %}
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
 
-{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+<div class="container text-center formLogin">
+    <h1 class="marginFormLogin">Allez viens on est bien !</h1>
+    {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
     {{ form_widget(form) }}
     <div>
         <input type="submit" value="{{ 'S\'enregistrer'|trans }}" />
     </div>
 {{ form_end(form) }}
+    <img src="../../images/allez.gif" class="marginFormLogin">
+</div>
