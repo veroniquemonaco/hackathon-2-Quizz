@@ -6,7 +6,7 @@
     {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
     {{ form_widget(form) }}
     <div>
-        <input type="submit" value="{{ 'S\'enregistrer'|trans }}" />
+        <input type="submit" value="{{ 'S\'enregistrer'|trans }}" class="btn btn-default bouton marginFormLogin" />
     </div>
 {{ form_end(form) }}
     <img src="../../images/allez.gif" class="marginFormLogin">

@@ -3,85 +3,94 @@
 {% block body %}
     {#{{ dump() }}#}
     <div class="container-fluid">
-        <div class="row">
+    <div class="row">
 
-            <!-- bloc HighScore -->
-            <div class="highScore">
-                <div class="col-lg-2 col-lg-offset-1">
+        <!-- bloc HighScore -->
+        <div class="highScore">
+            <div class="col-lg-2 col-lg-offset-1">
 
-                    <table class="table">
-                        <div class="row">
-                            <thead>
+                <table class="table">
+                    <div class="row">
+                        <thead>
+                        <tr>
+                            <th colspan="4">HIGHSCORE</th>
+                        </tr>
+                        <tr>
+                            <td class="tdRank col-lg-3"><strong>Rank</strong></td>
+                            <td class="tdNom col-lg-3"><strong>Nom</strong></td>
+                            <td class="tdScore col-lg-3"><strong>Score</strong></td>
+                            <td class="tdScore col-lg-3"><strong>Temps</strong></td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for game in games %}
                             <tr>
-                                <th colspan="4">HIGHSCORE</th>
+                                <td>{{ loop.index }}</td>
+                                <td>{{ game.player }}</td>
+                                <td>{{ game.finalscore }}</td>
+                                <td>{{ game.time }} s</td>
                             </tr>
-                            <tr>
-                                <td class="tdRank col-lg-3"><strong>Rank</strong></td>
-                                <td class="tdNom col-lg-3"><strong>Nom</strong></td>
-                                <td class="tdScore col-lg-3"><strong>Score</strong></td>
-                                <td class="tdScore col-lg-3"><strong>Temps</strong></td>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {% for game in games %}
-                                <tr>
-                                    <td>{{ loop.index }}</td>
-                                    <td>{{ game.player }}</td>
-                                    <td>{{ game.finalscore }}</td>
-                                    <td>{{ game.time }} s</td>
-                                </tr>
-                            {% endfor %}
-                            </tbody>
-                        </div>
-                    </table>
+                        {% endfor %}
+                        </tbody>
+                    </div>
+                </table>
 
-                </div>
             </div>
-            <!-- Fin bloc HighScore -->
+        </div>
+        <!-- Fin bloc HighScore -->
 
-            <!-- bloc Results -->
-            <div class="col-lg-5 col-lg-offset-1 text-center marginResult">
-                <h2><b>TU A FAIT {{ score }} POINTS!!! EN {{ temps }} SECONDES!</b></h2>
-                <h2><b>Tu a fait le {{ positionGen }}ème meilleur score de tous les temps de l'univers entier !</b></h2>
-                <h2><b>Tu a fait ton {{ positionSolo }}ème meilleur score !</b></h2>
-                <form action="{{ path('select') }}" method="post">
-                    <input class="btn btn-default bouton" name="valider" value="Rejouer" type="submit">
-                </form>
-            </div>
+        <!-- bloc Results -->
+        <div class="col-lg-5 col-lg-offset-1 text-center marginResult">
+            <h2><b>TU A FAIT {{ score }} POINTS!!! EN {{ temps }} SECONDES!</b></h2>
+            <h2><b>Tu a fait le {{ positionGen }}{% if positionGen == 1 %}er{% else %}ème{% endif %} meilleur score de
+                    tous les temps de l'univers entier !</b></h2>
+            <h2><b>Tu a fait ton {{ positionSolo }}{% if positionSolo == 1 %}er{% else %}ème{% endif %} meilleur score
+                    !</b></h2>
+            <form action="{{ path('select') }}" method="post">
+                <input class="btn btn-default bouton" name="valider" value="Rejouer" type="submit">
+            </form>
+            {% if positionGen == 1 %}
+                <img src="{{ asset('../../images/genial.gif') }}" class="marginFormLogin">
+            {% elseif positionGen <= 10 %}
+                <img src="{{ asset('../../images/ouais.gif') }}" class="marginFormLogin">
+            {% else %}
+                <img src="{{ asset('../../images/nul.gif') }}" class="marginFormLogin">
+            {% endif %}
+        </div>
 
-            <!-- Fin bloc Results -->
+        <!-- Fin bloc Results -->
 
-            <!-- bloc PersonnalScore -->
-            <div class="personnalScore">
-                <div class="col-lg-2">
+        <!-- bloc PersonnalScore -->
+        <div class="personnalScore">
+            <div class="col-lg-2">
 
-                    <table class="table">
-                        <div class="row">
-                            <thead>
+                <table class="table">
+                    <div class="row">
+                        <thead>
+                        <tr>
+                            <th colspan="4">BEST OF {{ gamesSolo[0].player|upper }}</th>
+                        </tr>
+                        <tr>
+                            <td class="tdRank col-lg-3"><strong>Rank</strong></td>
+                            <td class="tdScore col-lg-3"><strong>Score</strong></td>
+                            <td class="tdScore col-lg-3"><strong>Temps</strong></td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for gameSolo in gamesSolo %}
                             <tr>
-                                <th colspan="4">BEST OF {{ gamesSolo[0].player|upper }}</th>
+                                <td>{{ loop.index }}</td>
+                                <td>{{ gameSolo.finalscore }}</td>
+                                <td>{{ gameSolo.time }} s</td>
                             </tr>
-                            <tr>
-                                <td class="tdRank col-lg-3"><strong>Rank</strong></td>
-                                <td class="tdScore col-lg-3"><strong>Score</strong></td>
-                                <td class="tdScore col-lg-3"><strong>Temps</strong></td>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {% for gameSolo in gamesSolo %}
-                                <tr>
-                                    <td>{{ loop.index }}</td>
-                                    <td>{{ gameSolo.finalscore }}</td>
-                                    <td>{{ gameSolo.time }} s</td>
-                                </tr>
-                            {% endfor %}
-                            </tbody>
-                        </div>
-                    </table>
+                        {% endfor %}
+                        </tbody>
+                    </div>
+                </table>
 
 
-                </div>
             </div>
+        </div>
         <!-- Fin bloc PersonnalScore -->
     </div>
 {% endblock %}

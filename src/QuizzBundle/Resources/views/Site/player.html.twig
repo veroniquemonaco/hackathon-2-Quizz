@@ -3,13 +3,10 @@
 {% block body %}
     {#{{ dump() }}#}
 
-<div class="container-fluid">
-    <div class="row">
-
-                <!-- bloc PersonnalScore -->
-        <div class="personnalScore">
-            <div class="col-lg-2">
-
+    <div class="container-fluid">
+        <div class="row">
+            <!-- bloc PersonnalScore -->
+            <div class="personnalScore col-lg-3">
                 <table class="table">
                     <div class="row">
                         <thead>
@@ -34,50 +31,49 @@
                     </div>
                 </table>
             </div>
-        </div>
-
-        <!-- bloc Diagram -->
-        <h1>Vos Statistiques</h1>
-
-        <div class="col-lg-9 col-lg-offset-3 text-center">
-            <form action="{{ path('player') }}" method="post">
-                <div class="col-lg-2">
-                    <select name="difficultee">
-                            <option value="QuestionEasy">Facile</option>
-                            <option value="QuestionMedium">Moyen</option>
-                            <option value="QuestionHard">Difficle</option>
-                    </select><br>
+            <!-- bloc Diagram -->
+            <div class="col-lg-9 text-center marginResult">
+                <div class="row">
+                    <h1>Vos Statistiques</h1>
+                    <form action="{{ path('player') }}" method="post" class="marginFormLogin">
+                        <div class="form-group">
+                            <select name="difficultee">
+                                <option value="QuestionEasy">Facile</option>
+                                <option value="QuestionMedium">Moyen</option>
+                                <option value="QuestionHard">Difficle</option>
+                            </select>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <select name="Cate">
+                                {% for categorie in categories %}
+                                    <option value="{{ categorie.name }}">{{ categorie.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <input type="hidden" name="player" value="{{ user.username }}">
+                            <input class="btn btn-default bouton" name="choix" value="Go !" type="submit">
+                        </div>
+                    </form>
                 </div>
+                <hr/>
+                <div class="row">
+                    <div class="col-lg-6 text-center">
+                        <div class="col-sm-offset-1 col-sm-10 text-center ">
+                            <div id="gauge1" class="text-center"
+                                 style="margin:0 auto; width: 200px; height: 150px;"></div>
+                            {#<p>Pour {{ parties }} jouées</p>#}
+                        </div>
+                    </div>
 
-                <div class="col-lg-2">
-                    <select name="Cate">
-                        {% for categorie in categories %}
-                            <option value="{{ categorie.name }}">{{ categorie.name }}</option>
-                        {% endfor %}
-                    </select>
+                    <div class="col-lg-6 text-center ">
+                        <div id="gauge2" class="text-center" style="margin:0 auto; width: 200px; height: 150px;"></div>
+                    </div>
                 </div>
-
-                <input type="hidden" name="player" value="{{ user.username }}">
-
-                <div class="col-lg-2">
-                    <input class="btn btn-success" name="choix" value="go !" type="submit">
-                </div>
-            </form>
-        </div>
-
-        <div class="col-lg-4 col-lg-offset-2 text-center">
-            <div class="col-sm-offset-1 col-sm-10 text-center ">
-                <div id="gauge1" class="text-center" style="margin:0 auto; width: 200px; height: 150px;"></div>
-                {#<p>Pour {{ parties }} jouées</p>#}
-            </div>
-        </div>
-
-            <div class="col-sm-offset-1 col-sm-10 text-center ">
-                <div id="gauge2" class="text-center" style="margin:0 auto; width: 200px; height: 150px;"></div>
             </div>
         </div>
     </div>
-</div>
 {% endblock %}
 
 {% block javascripts %}
