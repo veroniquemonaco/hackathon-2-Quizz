@@ -1,82 +1,52 @@
 /* -------------------------------------------------------///
- ------------ Scripts Jardins de Gaston ------------------///
+ ------------ Scripts Quentionthon ------------------///
 ///-------------------------------------------------------*/
 
 
-/* Script beforeAfter - effet avant/apres dans les realisations */
+/* Script Diagram */
 
-/* Caroussel 3 */
-var divisor3 = document.getElementById("divisor3"),
-    slider3 = document.getElementById("slider3");
-function moveDivisor3() {
-    divisor3.style.width = slider3.value+"%";
-}
-
-/* Caroussel 2 */
-var divisor2 = document.getElementById("divisor2"),
-    slider2 = document.getElementById("slider2");
-function moveDivisor2() {
-    divisor2.style.width = slider2.value+"%";
-}
-
-/* Caroussel 1 */
-var divisor1 = document.getElementById("divisor1"),
-    slider1 = document.getElementById("slider1");
-function moveDivisor1() {
-    divisor1.style.width = slider1.value+"%";
-}
-
-/* ------------------------------------------------------------ */
+// var g = new JustGage({
+//     id: "gauge1",
+//     value: 7,
+//     min: 0,
+//     max: 10,
+//     title: "Culture Générale"
+// });
+//
+// var g = new JustGage({
+//     id: "gauge2",
+//     value: 7,
+//     min: 0,
+//     max: 10,
+//     title: "Moyenne de temps",
+// });
 
 
-/* Script navbar - changement de couleur de la navbar au scroll */
 
-$(function () {
-    $(document).scroll(function () {
-        var $nav = $(".navbar-inverse");
-        $nav.toggleClass('scrolled', $(this).scrollTop() > 700);
+    var g1 = new JustGage({
+        id: "gauge1",
+        value: 17,
+        min: 0,
+        max: 100,
+        title: "Culture Générale",
+        label: "",
+        startAnimationTime: 2000,
+        startAnimationType: ">",
+        refreshAnimationTime: 1000,
+        refreshAnimationType: "bounce"
     });
-});
 
-/* ------------------------------------------------------------ */
-
-
-/* Script Tagline - disparition de Jardinier par nature dans le header  */
-
-function tagline() {
-    var scroll = $(window).scrollTop();
-    if ($(window).width() > 200) {
-        if (scroll >= 600) {
-            $('#accroche').addClass('hidden');
-        } else {
-            $('#accroche').removeClass('hidden');
-        }
-
-    }
-}
-
-tagline();
-
-$(function() {
-    if ($(window).width() > 200) {
-        $(window).scroll(function () {
-            tagline();
-        });
-    }
-});
-
-/* ------------------------------------------------------------ */
-
-
-/* Script slideUp - remontee automatique du menu burger  */
-
-$(function(){
-    var navMain = $(".navbar-collapse"); // avoid dependency on #id
-    // "a:not([data-toggle])" - to avoid issues caused
-    // when you have dropdown inside navbar
-    navMain.on("click", "a:not([data-toggle])", null, function () {
-        navMain.collapse('hide');
+    var g2 = new JustGage({
+        id: "gauge2",
+        value: 85,
+        min: 0,
+        max: 100,
+        title: "Moyenne de temps",
+        label: "",
+        startAnimationTime: 2000,
+        startAnimationType: ">",
+        refreshAnimationTime: 1000,
+        refreshAnimationType: "bounce"
     });
-});
 
-/*--------------- Fin -----------*/
+

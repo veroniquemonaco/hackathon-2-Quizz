@@ -1,4 +1,13 @@
 /*base.html.twig*/
+.container-fluid {
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    border: none;
+    border-radius: 0;
+}
 
 body {
     font-family: Montserat;
@@ -8,6 +17,12 @@ h1 {
     color: #745698;
     font-weight: bold;
     text-transform: uppercase;
+}
+
+body{
+    background-image: url("../images/backgroundslide.jpeg");
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .banniere{
@@ -40,6 +55,11 @@ h1 {
     color:#ffffff;
 }
 
+.navbar-text.titre p{
+    color:#ffffff;
+    font-size: 2em;
+}
+
 /*index.html.twig Accueil du site*/
 
 .carousel-caption h2{
@@ -47,6 +67,41 @@ h1 {
     font-size: 70px;
     margin-bottom: 150px;
 }
+
+
+.carousel-inner{
+    background-color: rgba(0,0,0,0);
+}
+
+.table{
+    min-width: 400px;
+    max-width: 600px;
+    margin:auto;
+    margin-top:30px;
+    margin-bottom:30px;
+}
+
+.table th{
+    font-size: 2em;
+    text-align: center;
+
+}
+
+.table td{
+    font-size: 1.5em;
+    text-align: center;
+}
+
+/*.button.btn.btn-quizz.btn-lg.btn-block {*/
+    /*color:white;*/
+    /*background-color: #745698;*/
+/*}*/
+
+.btn-lg, .btn-group-lg > .btn{
+    color:white;
+    background-color: #745698;
+}
+
 
 /*formulaire login */
 
@@ -58,6 +113,11 @@ h1 {
 
 }
 
+.marginNom {
+    margin-top: 0px;
+}
+
 .marginFormLogin {
     margin: 30px auto;
 }
+

@@ -42,6 +42,20 @@ class Game
      */
     private $finalscore;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="questionList", type="string", length=255)
+     */
+    private $questionList;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="player", type="string", length=70)
+     */
+    private $player;
+
 
     /**
      * Get id
@@ -112,6 +126,42 @@ class Game
     {
         $this->finalscore = $finalscore;
 
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getQuestionList()
+    {
+        return $this->questionList;
+    }
+
+    /**
+     * @param string $questionList
+     * @return Game
+     */
+    public function setQuestionList($questionList)
+    {
+        $this->questionList = $questionList;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPlayer()
+    {
+        return $this->player;
+    }
+
+    /**
+     * @param string $player
+     * @return Game
+     */
+    public function setPlayer($player)
+    {
+        $this->player = $player;
         return $this;
     }
 

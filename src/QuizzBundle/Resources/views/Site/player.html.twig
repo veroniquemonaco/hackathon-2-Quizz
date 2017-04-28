@@ -1,0 +1,66 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+<div class="container-fluid">
+    <div class="row">
+        <!-- bloc Diagram -->
+        <div class="diagram">
+            <div id="gauge" class="200x160px"></div>
+        </div>
+    <div class="col-xs-12 text-center">
+        <div class="col-sm-offset-1 col-sm-10 text-center ">
+            <div id="gauge1" class="text-center" style="margin:0 auto; width: 200px; height: 150px;"></div>
+            </div>
+        </div>
+
+        <div class="col-sm-offset-1 col-sm-10 text-center ">
+            <div id="gauge2" class="text-center" style="margin:0 auto; width: 200px; height: 150px;"></div>
+        </div>
+    </div>
+    </div>
+
+        <!-- bloc PersonnalScore -->
+        <div class="personnalScore">
+            <div class="col-lg-2">
+                <h3>PERSONAL BEST</h3>
+                <table>
+                    <div class="row">
+                        <tr class="personnalScoreTR">
+                            <td class="tdRank col-lg-2">Rank</td>
+                            <td class="tdNom col-lg-2">Nom</td>
+                            <td class="tdScore col-lg-2">Score</td>
+                        </tr>
+
+                    </div>
+
+                    <tr>
+                        <td class="tdRank">1</td>
+                        <td class="tdNom">zrgzrg</td>
+                        <td class="tdScore">9001</td>
+                    </tr>
+                    <tr>
+                        <td class="tdRank">2</td>
+                        <td class="tdNom">dghthdht</td>
+                        <td class="tdScore">5</td>
+                    </tr>
+                    <tr>
+                        <td class="tdRank">3</td>
+                        <td class="tdNom">zzrgzrhg</td>
+                        <td class="tdScore">4</td>
+                    </tr>
+
+                </table>
+            </div>
+        </div>
+        <!-- Fin bloc PersonnalScore -->
+    </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/raphael-2.1.4.min.js') }}"></script>
+    <script src="{{ asset('js/justgage.js') }}"></script>
+    <script src="{{ asset('js/script.js') }}"></script>
+{% endblock %}
