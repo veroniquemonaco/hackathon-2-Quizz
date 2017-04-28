@@ -3,7 +3,9 @@
 namespace QuizzBundle\Controller;
 
 use QuizzBundle\Entity\Game;
+use QuizzBundle\QuizzBundle;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use QuizzBundle\Entity\Category;
 use Symfony\Component\Validator\Constraints\DateTime;
@@ -166,7 +168,8 @@ class DefaultController extends Controller
         }
 
 
-        $param = ['score' => $score, 'user' => $user, 'temps' => $timer, 'games' => $games, 'gamesSolo' => $gamesSolo, 'positionGen' => $positionGen, 'positionSolo' => $positionSolo];
+        $param = ['score' => $score, 'user' => $user, 'temps' => $timer, 'games' => $games, 'gamesSolo' => $gamesSolo,
+            'positionGen' => $positionGen, 'positionSolo' => $positionSolo];
         return $this->render('QuizzBundle:Site:result.html.twig', $param);
     }
 
@@ -237,21 +240,27 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/duel/", name="duel")
+     * @Route("/duel/{id}", name="duel")
+     *
+     *
      */
-    public function duelAction()
+
+    public function duelAction(Game $duel)
     {
         $em = $this->getDoctrine()->getManager();
 
         $games = $em->getRepository('QuizzBundle:Game')
             ->findBy([], ['finalscore' => 'DESC'], 1, 0);
 
-        $duel= $em->getRepository('QuizzBundle:Game')
-            ->find($_GET['$id']);
+        $diff = $duel->getDiff();
 
-        $duel->getQuestionList();
+        $questionList = explode(',', $duel->getQuestionList());
 
-        $questions = explode(',', $duel);
+        $questions = [];
+        foreach ($questionList as $question_id) {
+            $questions[] = $em->getRepository('QuizzBundle:' . $diff)
+                ->find($question_id);
+        }
 
 
 
@@ -265,6 +274,66 @@ class DefaultController extends Controller
      */
     public function finalAction()
     {
+        $user = $this->getUser();
+
+        $endtime = microtime(true);
+        $starttime = $_POST['starttime'];
+        $timer = $endtime - $starttime;
+        $timer = round($timer);
+
+        $scoreU = 0;
+        $score = 0;
+        for ($i = 1; $i <= 10; $i++) {
+            if (isset($_POST['Question' . $i])) {
+                if ($_POST['Question' . $i] == $_POST['answer' . $i]) {
+                    $score += 10000;
+                    $scoreU++;
+                }
+            }
+        }
+
+        if ('QuestionEasy' == $_POST['diff']) {
+            $score = $score * 1111;
+
+        } elseif ('QuestionMedium' == $_POST['diff']) {
+            $score = $score * 2222;
+
+        } elseif ('QuestionHard' == $_POST['diff']) {
+            $score = $score * 3333;
+        }
+
+        $score = round($score / $timer);
+
+        if (!empty($_POST)) {
+            $em = $this->getDoctrine()->getManager();
+            $game = new Game();
+            $game->setFinalscore($score);
+            $game->setPlayer($user->getUsername());
+            $game->setScore($scoreU);
+            $game->setTime($timer);
+            $game->setQuestionList($_POST['game']);
+            $game->setDiff($_POST['diff']);
+            $em->persist($game);
+            $em->flush();
+        }
+
+        $em = $this->getDoctrine()->getManager();
+
+        $tmp = $em->getRepository('QuizzBundle:Game')
+            ->findBy([], ['finalscore' => 'DESC']);
+
+        $games = $em->getRepository('QuizzBundle:Game')
+            ->findBy([], ['finalscore' => 'DESC'], 10, 0);
+
+        $positionGen = 0;
+        foreach ($tmp as $key => $val) {
+            if ($score == $val->getFinalscore()) {
+                $positionGen = $key + 1;
+            }
+        }
+
+        $param = ['score' => $score, 'user' => $user, 'temps' => $timer, 'games' => $games,'positionGen' => $positionGen];
+        return $this->render('QuizzBundle:Site:result.html.twig', $param);
     }
 
 
