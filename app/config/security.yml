@@ -35,6 +35,7 @@ security:
         - { path: ^/play, role: ROLE_USER }
         - { path: ^/defis, role: ROLE_USER }
         - { path: ^/duel, role: ROLE_USER }
+        - { path: ^/final, role: ROLE_USER }
         - { path: ^/result, role: ROLE_USER }
         - { path: ^/player, role: ROLE_USER }
         - { path: ^/category/, role: ROLE_ADMIN }

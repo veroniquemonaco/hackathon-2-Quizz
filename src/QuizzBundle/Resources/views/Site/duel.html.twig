@@ -5,6 +5,39 @@
 <div class="container-fluid">
     <div class="row">
 
+        <!-- bloc HighScore -->
+        <div class="highScore">
+            <div class="col-lg-2 col-lg-offset-1">
+                <table class="table">
+                    <div class="row">
+                        <thead>
+                        <tr>
+                            <th colspan="4">TON ADVERSAIRE</th>
+                        </tr>
+                        <tr>
+                            <td class="tdRank col-lg-3"><strong>Rank</strong></td>
+                            <td class="tdNom col-lg-3"><strong>Nom</strong></td>
+                            <td class="tdScore col-lg-3"><strong>Score</strong></td>
+                            <td class="tdScore col-lg-3"><strong>Temps</strong></td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for game2 in games2 %}
+                            <tr>
+                                <td>{{ loop.index }}</td>
+                                <td>{{ game2.player }}</td>
+                                <td>{{ game2.finalscore }}</td>
+                                <td>{{ game2.time }} s</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </div>
+                </table>
+
+            </div>
+        </div>
+        <!-- Fin bloc HighScore -->
+
         <!-- bloc carousel question -->
         <div class="col-lg-offset-1 col-lg-4 play">
             <div id="carousel" class="carousel slide fade in" data-ride="carousel" data-interval="false">

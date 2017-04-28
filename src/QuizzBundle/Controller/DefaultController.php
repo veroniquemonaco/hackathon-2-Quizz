@@ -180,7 +180,6 @@ class DefaultController extends Controller
 
         $cat = 'Culture Générale';
         $diff = 'QuestionEasy';
-        $time = '10';
 
         $em = $this->getDoctrine()->getManager();
 
@@ -244,8 +243,27 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
+        $games = $em->getRepository('QuizzBundle:Game')
+            ->findBy([], ['finalscore' => 'DESC'], 1, 0);
+
+        $duel= $em->getRepository('QuizzBundle:Game')
+            ->find($_GET['$id']);
+
+        $duel->getQuestionList();
+
+        $question = explode(',', $duel);
+
+
+
         $user = $this->getUser();
-        return $this->render('QuizzBundle:Site:defis.html.twig', ['user' => $user]);
+        return $this->render('QuizzBundle:Site:defis.html.twig', ['user' => $user, 'games'=>$games, 'duel'=>$duel]);
+    }
+
+    /**
+     * @Route("/final/", name="final")
+     */
+    public function finalAction()
+    {
     }
 
 

@@ -36,6 +36,12 @@ h1 {
     background-color: #745698;
 }
 
+.banniere2{
+    background-color: #745698;
+    height: 40px;
+    color: white;
+}
+
 .formbanniere{
     padding-top:15px;
     padding-bottom:15px;
