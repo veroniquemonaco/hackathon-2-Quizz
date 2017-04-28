@@ -17,10 +17,10 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $games = $em->getRepository('QuizzBundle:Game')
-            ->findBy([], ['finalscore'=>'DESC'], 10,0);
+            ->findBy([], ['finalscore' => 'DESC'], 10, 0);
 
         $user = $this->getUser();
-        return $this->render('QuizzBundle:Site:index.html.twig', ['user' => $user, 'games'=>$games]);
+        return $this->render('QuizzBundle:Site:index.html.twig', ['user' => $user, 'games' => $games]);
     }
 
     /**
@@ -35,13 +35,13 @@ class DefaultController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         $games = $em->getRepository('QuizzBundle:Game')
-            ->findBy([], ['finalscore'=>'DESC'], 10,0);
+            ->findBy([], ['finalscore' => 'DESC'], 10, 0);
 
         $em = $this->getDoctrine()->getManager();
         $gamesSolo = $em->getRepository('QuizzBundle:Game')
-            ->findBy(['player'=>$user->getUsername()], ['finalscore'=>'DESC'], 10,0);
+            ->findBy(['player' => $user->getUsername()], ['finalscore' => 'DESC'], 10, 0);
 
-        $param = ['categories' => $category, 'user' => $user, 'games'=>$games, 'gamesSolo'=>$gamesSolo];
+        $param = ['categories' => $category, 'user' => $user, 'games' => $games, 'gamesSolo' => $gamesSolo];
         return $this->render('QuizzBundle:Site:select.html.twig', $param);
     }
 
@@ -58,8 +58,7 @@ class DefaultController extends Controller
             shuffle($question);
             $questions = array_slice($question, 0, 10);
 
-            foreach ($questions as $question)
-            {
+            foreach ($questions as $question) {
                 $game[] = $question->getId();
             }
         } else {
@@ -71,18 +70,25 @@ class DefaultController extends Controller
             shuffle($question);
             $questions = array_slice($question, 0, 10);
 
-            foreach ($questions as $question)
-            {
+            foreach ($questions as $question) {
                 $game[] = $question['id'];
             }
         }
 
-        $game=implode(',',$game);
+        $game = implode(',', $game);
         $starttime = microtime(true);
 
+        $em = $this->getDoctrine()->getManager();
+        $games = $em->getRepository('QuizzBundle:Game')
+            ->findBy([], ['finalscore' => 'DESC'], 10, 0);
 
-        $param = ['questions'=>$questions, 'diff'=>$_POST['difficultee'], 'user'=>$user, 'starttime'=>$starttime, 'game'=>$game];
-        return $this->render('QuizzBundle:Site:play.html.twig',$param);
+        $em = $this->getDoctrine()->getManager();
+        $gamesSolo = $em->getRepository('QuizzBundle:Game')
+            ->findBy(['player' => $user->getUsername()], ['finalscore' => 'DESC'], 10, 0);
+
+
+        $param = ['questions' => $questions, 'diff' => $_POST['difficultee'], 'user' => $user, 'starttime' => $starttime, 'game' => $game, 'games2' => $games, 'gamesSolo' => $gamesSolo];
+        return $this->render('QuizzBundle:Site:play.html.twig', $param);
 
     }
 
@@ -104,7 +110,7 @@ class DefaultController extends Controller
             if (isset($_POST['Question' . $i])) {
                 if ($_POST['Question' . $i] == $_POST['answer' . $i]) {
                     $score += 10000;
-                    $scoreU ++;
+                    $scoreU++;
                 }
             }
         }
@@ -134,7 +140,33 @@ class DefaultController extends Controller
             $em->flush();
         }
 
-        $param = ['score' => $score, 'user' => $user, 'temps' => $timer];
+        $em = $this->getDoctrine()->getManager();
+        $games = $em->getRepository('QuizzBundle:Game')
+            ->findBy([], ['finalscore' => 'DESC'], 10, 0);
+
+        $gamesSolo = $em->getRepository('QuizzBundle:Game')
+            ->findBy(['player' => $user->getUsername()], ['finalscore' => 'DESC'], 10, 0);
+
+        $tmp = $em->getRepository('QuizzBundle:Game')
+            ->findBy([], ['finalscore' => 'DESC']);
+        $positionGen = 0;
+        foreach ($tmp as $key => $val) {
+            if ($score == $val->getFinalscore()) {
+                $positionGen = $key + 1;
+            }
+        }
+
+        $tmp2 = $em->getRepository('QuizzBundle:Game')
+            ->findBy(['player' => $user->getUsername()], ['finalscore' => 'DESC']);
+        $positionSolo = 0;
+        foreach ($tmp2 as $key => $val) {
+            if ($score == $val->getFinalscore()) {
+                $positionSolo = $key + 1;
+            }
+        }
+
+
+        $param = ['score' => $score, 'user' => $user, 'temps' => $timer, 'games' => $games, 'gamesSolo' => $gamesSolo, 'positionGen' => $positionGen, 'positionSolo' => $positionSolo];
         return $this->render('QuizzBundle:Site:result.html.twig', $param);
     }
 
@@ -184,9 +216,10 @@ class DefaultController extends Controller
             ->findAll();
 
         $gamesSolo = $em->getRepository('QuizzBundle:Game')
-            ->findBy(['player'=>$user->getUsername()], ['finalscore'=>'DESC'], 10,0);
+            ->findBy(['player' => $user->getUsername()], ['finalscore' => 'DESC'], 10, 0);
 
         return $this->render('QuizzBundle:Site:player.html.twig',
+
             ['user'=>$user, 'categories'=>$category, 'cat'=>$cat, 'diff'=>$diff, 'gamesSolo'=>$gamesSolo, 'moyenne'=>$moyenne, 'moyennetime'=>$moyennetime]);
 
     }
