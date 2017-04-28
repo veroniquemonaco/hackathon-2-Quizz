@@ -224,7 +224,8 @@ class DefaultController extends Controller
 
         return $this->render('QuizzBundle:Site:player.html.twig',
 
-            ['user' => $user, 'categories' => $category, 'cat' => $cat, 'diff' => $diff, 'gamesSolo' => $gamesSolo, 'moyenne' => $moyenne, 'moyennetime' => $moyennetime]);
+            ['user' => $user, 'categories' => $category, 'cat' => $cat, 'diff' => $diff, 'gamesSolo' => $gamesSolo,
+                'moyenne' => $moyenne, 'moyennetime' => $moyennetime]);
 
     }
 
@@ -256,6 +257,7 @@ class DefaultController extends Controller
             ->findBy([], ['finalscore' => 'DESC'], 10, 0);
 
         $em = $this->getDoctrine()->getManager();
+
         $gamesSolo = $em->getRepository('QuizzBundle:Game')
             ->findBy(['player' => $user->getUsername()], ['finalscore' => 'DESC'], 10, 0);
 
@@ -272,11 +274,15 @@ class DefaultController extends Controller
 
         $list = $duel->getQuestionList();
 
+        $finalScore = $duel->getFinalscore();
+
         $starttime = microtime(true);
         $user = $this->getUser();
 
-        return $this->render('QuizzBundle:Site:duel.html.twig', ['user' => $user, 'games' => $games, 'diff' => $diff,
-            'duel' => $duel, 'starttime' => $starttime, 'questions' => $questions, 'list' => $list, 'gamesSolo' => $gamesSolo]);
+
+        return $this->render('QuizzBundle:Site:duel.html.twig', ['user' => $user, 'games'=>$games, 'diff'=>$diff,
+            'duel'=>$duel, 'starttime'=>$starttime, 'questions'=>$questions, 'list'=>$list, 'gamesSolo'=>$gamesSolo,
+            'finalScore'=>$finalScore]);
 
     }
 
@@ -332,6 +338,8 @@ class DefaultController extends Controller
             $em->flush();
         }
 
+        $finalScore = $_POST['finalScore'];
+
         $em = $this->getDoctrine()->getManager();
 
         $tmp = $em->getRepository('QuizzBundle:Game')
@@ -347,7 +355,14 @@ class DefaultController extends Controller
             }
         }
 
-        $param = ['score' => $score, 'user' => $user, 'temps' => $timer, 'games' => $games, 'positionGen' => $positionGen];
+        $gamesSolo = $em->getRepository('QuizzBundle:Game')
+            ->findBy(['player' => $user->getUsername()], ['finalscore' => 'DESC'], 10, 0);
+
+
+
+
+        $param = ['score' => $score, 'user' => $user, 'temps' => $timer, 'games' => $games, 'gamesSolo' => $gamesSolo,
+            'positionGen' => $positionGen, 'finalScore'=>$finalScore];
         return $this->render('QuizzBundle:Site:final.html.twig', $param);
     }
 
