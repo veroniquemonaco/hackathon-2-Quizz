@@ -10,8 +10,8 @@ namespace QuizzBundle\Repository;
  */
 class GameRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function countMoyenne($category) {
-        $rawSql = "SELECT * FROM game WHERE category.id=$category";
+    public function countMoyenne($diff, $player) {
+        $rawSql = "SELECT * FROM game WHERE diff =$diff AND player = $player";
 
         $stmt = $this->getEntityManager()->getConnection()->prepare($rawSql);
         $stmt->execute([]);
