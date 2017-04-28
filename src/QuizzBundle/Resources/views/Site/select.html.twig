@@ -56,7 +56,7 @@
 
                         <select name="Cate">
                             {% for categorie in categories %}
-                                {% if loop.index == 1 %}<option value="random">Aléatoire</option>{% endif %}
+                                {% if loop.index == 1 %}<option value="random">Toutes</option>{% endif %}
                                 <option value="{{ categorie.name }}">{{ categorie.name }}</option>
                             {% endfor %}
                         </select><br><br>
