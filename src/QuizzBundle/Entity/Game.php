@@ -56,6 +56,28 @@ class Game
      */
     private $player;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="diff", type="string", length=70)
+     */
+    private $diff;
+
+    /**
+     * @return string
+     */
+    public function getDiff()
+    {
+        return $this->diff;
+    }
+
+    /**
+     * @param string $diff
+     */
+    public function setDiff($diff)
+    {
+        $this->diff = $diff;
+    }
 
     /**
      * Get id

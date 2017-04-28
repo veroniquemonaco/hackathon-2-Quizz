@@ -41,12 +41,12 @@
             <!-- Fin bloc HighScore -->
 
             <!-- bloc Results -->
-            <div class="col-lg-6">
+            <div class="col-lg-6 text-center">
                 <h2><b>TU A FAIT {{ score }} POINTS!!! EN {{ temps }} SECONDES!</b></h2>
                 <h2><b>Tu a fait le 23e meilleur score de tous les temps de l'univers entier</b></h2>
                 <h2><b>Tu a fait ton 4e meilleur score</b></h2>
                 <form action="{{ path('select') }}" method="post">
-                    <input class="btn btn-success" name="valider" value="Rejouer" type="submit">
+                    <input class="btn btn-default bouton" name="valider" value="Rejouer" type="submit">
                 </form>
             </div>
 

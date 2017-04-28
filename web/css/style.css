@@ -118,7 +118,9 @@ h1 {
 }
 
 .bouton {
-
+    background-color: #745698;
+    color: #ddd;
+    margin-top: 20px;
 }
 
 .marginNom {
