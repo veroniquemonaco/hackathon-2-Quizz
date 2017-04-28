@@ -15,8 +15,12 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
+        $em = $this->getDoctrine()->getManager();
+        $games = $em->getRepository('QuizzBundle:Game')
+            ->findBy([], ['finalscore'=>'DESC'], 10,0);
+
         $user = $this->getUser();
-        return $this->render('QuizzBundle:Site:index.html.twig', ['user' => $user]);
+        return $this->render('QuizzBundle:Site:index.html.twig', ['user' => $user, 'games'=>$games]);
     }
 
     /**
@@ -29,7 +33,15 @@ class DefaultController extends Controller
         $category = $em->getRepository('QuizzBundle:Category')
             ->findAll();
 
-        $param = ['categories' => $category, 'user' => $user];
+        $em = $this->getDoctrine()->getManager();
+        $games = $em->getRepository('QuizzBundle:Game')
+            ->findBy([], ['finalscore'=>'DESC'], 10,0);
+
+        $em = $this->getDoctrine()->getManager();
+        $gamesSolo = $em->getRepository('QuizzBundle:Game')
+            ->findBy(['player'=>$user->getUsername()], ['finalscore'=>'DESC'], 10,0);
+
+        $param = ['categories' => $category, 'user' => $user, 'games'=>$games, 'gamesSolo'=>$gamesSolo];
         return $this->render('QuizzBundle:Site:select.html.twig', $param);
     }
 
@@ -163,8 +175,13 @@ class DefaultController extends Controller
         }
         $result =  $somme / $parties;
 
+        $gamesSolo = $em->getRepository('QuizzBundle:Game')
+            ->findBy(['player'=>$user->getUsername()], ['finalscore'=>'DESC'], 10,0);
+
         return $this->render('QuizzBundle:Site:player.html.twig',
-            ['user'=>$user, 'categories'=>$category, 'score'=>$score, 'cat'=>$cat, 'diff'=>$diff, 'parties'=>$parties]);
+            ['user'=>$user, 'categories'=>$category, 'game'=>$game, 'cat'=>$cat, 'diff'=>$diff,
+                'score'=>$score, 'gamesSolo'=>$gamesSolo,'parties'=>$parties]);
+
     }
 
 //    public function moyenne()

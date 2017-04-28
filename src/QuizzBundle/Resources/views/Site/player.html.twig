@@ -9,14 +9,28 @@
                 <!-- bloc PersonnalScore -->
         <div class="personnalScore">
             <div class="col-lg-2">
-                <h3>PERSONAL BEST</h3>
-                <table>
+
+                <table class="table">
                     <div class="row">
-                        <tr class="personnalScoreTR">
-                            <td class="tdRank col-lg-2"><strong>Rank</strong></td>
-                            <td class="tdNom col-lg-2"><strong>Nom</strong></td>
-                            <td class="tdScore col-lg-2"><strong>Score</strong></td>
+                        <thead>
+                        <tr>
+                            <th colspan="4">BEST OF {{ gamesSolo[0].player|upper }}</th>
                         </tr>
+                        <tr>
+                            <td class="tdRank col-lg-3"><strong>Rank</strong></td>
+                            <td class="tdScore col-lg-3"><strong>Score</strong></td>
+                            <td class="tdScore col-lg-3"><strong>Temps</strong></td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for gameSolo in gamesSolo %}
+                            <tr>
+                                <td>{{ loop.index }}</td>
+                                <td>{{ gameSolo.finalscore }}</td>
+                                <td>{{ gameSolo.time }} s</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
                     </div>
                 </table>
             </div>
