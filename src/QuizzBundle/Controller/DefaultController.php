@@ -144,36 +144,44 @@ class DefaultController extends Controller
      */
     public function playerAction()
     {
+        $user = $this->getUser();
+
         $cat= 'Culture Générale';
-        $dif = 'Facile';
+        $diff = 'Facile';
+        $player = '';
+
         if (!empty($_POST)){
             $cat = $_POST['Cate'];
-            $dif = $_POST['difficultee'];
+            $diff = $_POST['difficultee'];
+            $player = $_POST['player'];
         }
 
-        $moyScore = $this->moyenne();
 
-        $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
+
         $category = $em->getRepository('QuizzBundle:Category')
             ->findAll();
+
         $game = $em->getRepository('QuizzBundle:Game')
             ->findAll();
 
+        $score = $em->getRepository('QuizzBundle:Game')
+            ->findBy (['diff'=>$diff, 'player'=>$player]);
+
         return $this->render('QuizzBundle:Site:player.html.twig',
-            ['user'=>$user, 'categories'=>$category, 'game'=>$game, 'cat'=>$cat, 'dif'=>$dif]);
+            ['user'=>$user, 'categories'=>$category, 'game'=>$game, 'cat'=>$cat, 'diff'=>$diff, 'score'=>$score]);
     }
 
-    public function moyenne()
-    {
-        $Nombres = func_get_args();
-        $Nb = sizeof($Nombres);
-        $Somme = 0;
-        foreach ($Nombres as $Valeur)
-        {
-            $Somme += $Valeur;
-        }
-        return ($Somme / $Nb);
-    }
+//    public function moyenne()
+//    {
+//        $Nombres = func_get_args();
+//        $Nb = sizeof($Nombres);
+//        $Somme = 0;
+//        foreach ($Nombres as $Valeur)
+//        {
+//            $Somme += $Valeur;
+//        }
+//        return ($Somme / $Nb);
+//    }
 
 }
