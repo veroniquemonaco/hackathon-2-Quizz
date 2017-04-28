@@ -11,7 +11,7 @@ namespace QuizzBundle\Repository;
 class QuestionMediumRepository extends \Doctrine\ORM\EntityRepository
 {
     public function findByCategory($category) {
-        $rawSql = "SELECT * FROM question_medium JOIN category ON question_medium.category_id=category.id WHERE category.id=$category";
+        $rawSql = "SELECT * FROM category JOIN question_medium ON category.id=question_medium.category_id WHERE category.id=$category";
 
         $stmt = $this->getEntityManager()->getConnection()->prepare($rawSql);
         $stmt->execute([]);

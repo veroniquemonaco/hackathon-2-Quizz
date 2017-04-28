@@ -43,20 +43,28 @@ class DefaultController extends Controller
         if ("random" == $_POST['Cate']) {
             $question = $em->getRepository('QuizzBundle:' . $_POST['difficultee'])
                 ->findAll();
+            shuffle($question);
+            $questions = array_slice($question, 0, 10);
+
+            foreach ($questions as $question)
+            {
+                $game[] = $question->getId();
+            }
         } else {
             $category = $em->getRepository('QuizzBundle:Category')
                 ->findBy(['name' => $_POST['Cate']]);
             $cateId = $category[0]->getId();
             $question = $em->getRepository('QuizzBundle:' . $_POST['difficultee'])
                 ->findByCategory($cateId);
-        }
-        shuffle($question);
-        $questions = array_slice($question, 0, 10);
+            shuffle($question);
+            $questions = array_slice($question, 0, 10);
 
-        foreach ($questions as $question)
-        {
-            $game[] = $question->getId();
+            foreach ($questions as $question)
+            {
+                $game[] = $question['id'];
+            }
         }
+
         $game=implode(',',$game);
         $starttime = microtime(true);
 
@@ -90,16 +98,16 @@ class DefaultController extends Controller
         }
 
         if ('QuestionEasy' == $_POST['diff']) {
-            $score = $score * (111 + (1 / (mt_rand(1, 99999999))));
+            $score = $score * 1111;
 
         } elseif ('QuestionMedium' == $_POST['diff']) {
-            $score = $score * (222 + (1 / (mt_rand(1, 99999999))));
+            $score = $score * 2222;
 
         } elseif ('QuestionHard' == $_POST['diff']) {
-            $score = $score * (333 + (1 / (mt_rand(1, 99999999))));
+            $score = $score * 3333;
         }
 
-        $score = $score / $timer;
+        $score = round($score / $timer);
 
         if (!empty($_POST)) {
             $em = $this->getDoctrine()->getManager();
