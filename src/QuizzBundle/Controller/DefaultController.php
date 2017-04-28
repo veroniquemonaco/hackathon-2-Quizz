@@ -89,7 +89,8 @@ class DefaultController extends Controller
             ->findBy(['player' => $user->getUsername()], ['finalscore' => 'DESC'], 10, 0);
 
 
-        $param = ['questions' => $questions, 'diff' => $_POST['difficultee'], 'user' => $user, 'starttime' => $starttime, 'game' => $game, 'games2' => $games, 'gamesSolo' => $gamesSolo];
+        $param = ['questions' => $questions, 'diff' => $_POST['difficultee'], 'user' => $user, 'starttime' => $starttime,
+            'game' => $game, 'games2' => $games, 'gamesSolo' => $gamesSolo];
         return $this->render('QuizzBundle:Site:play.html.twig', $param);
 
     }
@@ -248,9 +249,15 @@ class DefaultController extends Controller
     public function duelAction(Game $duel)
     {
         $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
 
         $games = $em->getRepository('QuizzBundle:Game')
-            ->findBy([], ['finalscore' => 'DESC'], 1, 0);
+            ->findBy([], ['finalscore' => 'DESC'], 10, 0);
+
+        $em = $this->getDoctrine()->getManager();
+        $gamesSolo = $em->getRepository('QuizzBundle:Game')
+            ->findBy(['player' => $user->getUsername()], ['finalscore' => 'DESC'], 10, 0);
+
 
         $diff = $duel->getDiff();
 
@@ -262,11 +269,13 @@ class DefaultController extends Controller
                 ->find($question_id);
         }
 
+        $list = $duel->getQuestionList();
 
-
+        $starttime = microtime(true);
         $user = $this->getUser();
-        return $this->render('QuizzBundle:Site:defis.html.twig', ['user' => $user, 'games'=>$games, 'duel'=>$duel,
-            'questions'=>$questions]);
+
+        return $this->render('QuizzBundle:Site:duel.html.twig', ['user' => $user, 'games'=>$games, 'diff'=>$diff,
+            'duel'=>$duel, 'starttime'=>$starttime, 'questions'=>$questions, 'list'=>$list, 'gamesSolo'=>$gamesSolo]);
     }
 
     /**
