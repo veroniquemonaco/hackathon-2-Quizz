@@ -109,6 +109,7 @@ class DefaultController extends Controller
             $game->setScore($scoreU);
             $game->setTime($timer);
             $game->setQuestionList($_POST['game']);
+            $game->setDiff($_POST['diff']);
             $em->persist($game);
             $em->flush();
         }
