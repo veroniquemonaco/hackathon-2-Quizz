@@ -41,10 +41,13 @@
 
         <!-- bloc Results -->
         <div class="col-lg-5 col-lg-offset-1 text-center marginResult">
-            <h2><b>TU A FAIT {{ score }} POINTS!!! EN {{ temps }} SECONDES!</b></h2>
-            <h2><b>Tu a fait le {{ positionGen }}{% if positionGen == 1 %}er{% else %}ème{% endif %} meilleur score de
+            <h2><b>TU AS FAIT {{ score }} POINTS!!! EN {{ temps }} SECONDES!</b></h2>
+
+            <h2><b>Tu as eu bonnes réponses</b></h2>
+
+            <h2><b>Tu as fait le {{ positionGen }}{% if positionGen == 1 %}er{% else %}ème{% endif %} meilleur score de
                     tous les temps de l'univers entier !</b></h2>
-            <h2><b>Tu a fait ton {{ positionSolo }}{% if positionSolo == 1 %}er{% else %}ème{% endif %} meilleur score
+            <h2><b>Tu as fait ton {{ positionSolo }}{% if positionSolo == 1 %}er{% else %}ème{% endif %} meilleur score
                     !</b></h2>
             <form action="{{ path('select') }}" method="post">
                 <input class="btn btn-default bouton" name="valider" value="Rejouer" type="submit">

@@ -41,18 +41,20 @@
 
         <!-- bloc Results -->
         <div class="col-lg-5 col-lg-offset-1 text-center marginResult">
-            <h2><b>TU A FAIT {{ score }} POINTS!!! EN {{ temps }} SECONDES!</b></h2>
+            <h2><b>TU AS FAIT {{ score }} POINTS!!! EN {{ temps }} SECONDES!</b></h2>
+
+            <h2><b>Tu as eu bonnes {{ good }} réponses</b></h2>
 
             {% if  score  >  finalScore  %}
-            <h2><b>Tu a battu ton adversaire ! T'es pas mauvais !</b></h2>
+            <h2><b>Tu as battu ton adversaire ! T'es pas mauvais !</b></h2>
             {% endif %}
 
             {% if positionGen == 1 %}
-            <h2><b>Tu a massacré ton adversaire et passé 1er du top classement mondial universel !</b></h2>
+            <h2><b>Tu as massacré ton adversaire et passé 1er du top classement mondial universel !</b></h2>
             {% endif %}
 
             {% if  score  <  finalScore  %}
-            <h2><b>Tu a perdu ... une autre fois peut-être</b></h2>
+            <h2><b>Tu as perdu ... une autre fois peut-être</b></h2>
 
             {% endif %}
 

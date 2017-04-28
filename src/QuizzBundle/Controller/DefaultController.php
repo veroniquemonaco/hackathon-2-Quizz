@@ -276,13 +276,15 @@ class DefaultController extends Controller
 
         $finalScore = $duel->getFinalscore();
 
+        $good = $duel->getScore();
+
         $starttime = microtime(true);
         $user = $this->getUser();
 
 
         return $this->render('QuizzBundle:Site:duel.html.twig', ['user' => $user, 'games'=>$games, 'diff'=>$diff,
             'duel'=>$duel, 'starttime'=>$starttime, 'questions'=>$questions, 'list'=>$list, 'gamesSolo'=>$gamesSolo,
-            'finalScore'=>$finalScore]);
+            'finalScore'=>$finalScore, 'good'=>$good]);
 
     }
 
