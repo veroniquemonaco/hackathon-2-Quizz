@@ -168,8 +168,11 @@ class DefaultController extends Controller
         $score = $em->getRepository('QuizzBundle:Game')
             ->findBy (['diff'=>$diff, 'player'=>$player]);
 
+        $gamesSolo = $em->getRepository('QuizzBundle:Game')
+            ->findBy(['player'=>$user->getUsername()], ['finalscore'=>'DESC'], 10,0);
+
         return $this->render('QuizzBundle:Site:player.html.twig',
-            ['user'=>$user, 'categories'=>$category, 'game'=>$game, 'cat'=>$cat, 'diff'=>$diff, 'score'=>$score]);
+            ['user'=>$user, 'categories'=>$category, 'game'=>$game, 'cat'=>$cat, 'diff'=>$diff, 'score'=>$score, 'gamesSolo'=>$gamesSolo]);
     }
 
 //    public function moyenne()
